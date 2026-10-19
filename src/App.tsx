@@ -48,7 +48,21 @@ const DEFAULT_STATE: PlayerState = {
   startTime: Date.now(), quickMode: false, exploreMode: false
 };
 
-// ============ SVG ILLUSTRATIONS ============
+// ============ SCENE IMAGES ============
+const SCENE_IMAGES: Record<string, string> = {
+  'brumaire': 'https://image.qwenlm.ai/generated-images/3abf3817-2c1c-4009-83ac-ba0f59a035cd/_result.png',
+  'coronation': 'https://image.qwenlm.ai/generated-images/fb33479f-e95f-442d-a21c-fd250961596f/_result.png',
+  'austerlitz': 'https://image.qwenlm.ai/generated-images/bdbf331a-aa88-4895-bb1d-02a169b0b99d/_result.png',
+  'tilsit': 'https://image.qwenlm.ai/generated-images/86c0f39a-9984-43cd-8276-dc2039f62fc9/_result.png',
+  'borodino': 'https://image.qwenlm.ai/generated-images/b6c02ef8-0b87-46a0-a48b-681d9f31d5c2/_result.png',
+  'moscow_fire': 'https://image.qwenlm.ai/generated-images/f2a30b09-a40f-44dc-bf62-50f37003a61a/_result.png',
+  'leipzig': 'https://image.qwenlm.ai/generated-images/a2345157-bd19-4c32-ac42-e43aa433f950/_result.png',
+  'waterloo': 'https://image.qwenlm.ai/generated-images/24c2b948-4891-4df3-8ed4-856334b5c697/_result.png',
+  'vienna': 'https://image.qwenlm.ai/generated-images/c9dadbd0-b30e-4fc1-8b39-ed05c8162bfd/_result.png',
+  'menu_napoleon': 'https://image.qwenlm.ai/generated-images/41aedfc7-8ff5-49e1-bf1a-d379b261c461/_result.png'
+};
+
+// ============ SVG ILLUSTRATIONS (fallback) ============
 const SVGIllustrations: Record<string, React.ReactNode> = {
   brumaire: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
@@ -70,20 +84,30 @@ const SVGIllustrations: Record<string, React.ReactNode> = {
   ),
   consulate: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="parchment" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5efe0"/>
+          <stop offset="100%" stopColor="#e5d5b0"/>
+        </linearGradient>
+        <radialGradient id="seal">
+          <stop offset="0%" stopColor="#d4af37"/>
+          <stop offset="100%" stopColor="#a07820"/>
+        </radialGradient>
+      </defs>
       <rect width="400" height="250" fill="#1a1f3a"/>
-      <rect x="100" y="50" width="200" height="150" fill="#2a2a3a" rx="8"/>
-      <rect x="120" y="70" width="160" height="110" fill="#f5efe0" opacity="0.9" rx="4"/>
-      <text x="200" y="100" textAnchor="middle" fill="#1a1f3a" fontSize="12" fontFamily="Georgia" fontWeight="bold">CODE CIVIL</text>
-      <text x="200" y="118" textAnchor="middle" fill="#1a1f3a" fontSize="10" fontFamily="Georgia">DES FRANÇAIS</text>
-      <line x1="140" y1="130" x2="260" y2="130" stroke="#1a1f3a" strokeWidth="0.5"/>
-      <line x1="140" y1="140" x2="260" y2="140" stroke="#1a1f3a" strokeWidth="0.5"/>
-      <line x1="140" y1="150" x2="260" y2="150" stroke="#1a1f3a" strokeWidth="0.5"/>
-      <line x1="140" y1="160" x2="240" y2="160" stroke="#1a1f3a" strokeWidth="0.5"/>
-      <circle cx="200" cy="170" r="8" fill="#d4af37"/>
-      <text x="200" y="173" textAnchor="middle" fill="#1a1f3a" fontSize="8">N</text>
-      <rect x="60" y="180" width="30" height="40" fill="#7b1e2b" rx="2"/>
-      <rect x="310" y="180" width="30" height="40" fill="#7b1e2b" rx="2"/>
-      <text x="200" y="230" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">Кодекс Наполеона 1804</text>
+      <rect x="80" y="30" width="240" height="180" fill="url(#parchment)" rx="8" opacity="0.95"/>
+      <rect x="85" y="35" width="230" height="170" fill="none" stroke="#a07820" strokeWidth="2" rx="6"/>
+      <rect x="90" y="40" width="220" height="160" fill="none" stroke="#d4af37" strokeWidth="1" rx="4" opacity="0.5"/>
+      <text x="200" y="75" textAnchor="middle" fill="#1a1f3a" fontSize="16" fontFamily="Georgia" fontWeight="bold">CODE CIVIL</text>
+      <text x="200" y="95" textAnchor="middle" fill="#1a1f3a" fontSize="12" fontFamily="Georgia">DES FRANÇAIS</text>
+      <line x1="120" y1="105" x2="280" y2="105" stroke="#1a1f3a" strokeWidth="1" opacity="0.3"/>
+      <line x1="120" y1="120" x2="280" y2="120" stroke="#1a1f3a" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="130" x2="280" y2="130" stroke="#1a1f3a" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="140" x2="260" y2="140" stroke="#1a1f3a" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="150" x2="240" y2="150" stroke="#1a1f3a" strokeWidth="0.5" opacity="0.4"/>
+      <circle cx="200" cy="175" r="15" fill="url(#seal)"/>
+      <text x="200" y="180" textAnchor="middle" fill="#1a1f3a" fontSize="14" fontFamily="Georgia" fontWeight="bold">N</text>
+      <text x="200" y="235" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">Кодекс Наполеона 1804</text>
     </svg>
   ),
   coronation: (
@@ -105,16 +129,37 @@ const SVGIllustrations: Record<string, React.ReactNode> = {
   ),
   propaganda: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow">
+          <stop offset="0%" stopColor="#d4af37" stopOpacity="0.4"/>
+          <stop offset="100%" stopColor="#d4af37" stopOpacity="0"/>
+        </radialGradient>
+      </defs>
       <rect width="400" height="250" fill="#1a1f3a"/>
-      <rect x="120" y="30" width="160" height="190" fill="#f5efe0" opacity="0.1" rx="8" stroke="#d4af37" strokeWidth="2"/>
-      <circle cx="200" cy="80" r="25" fill="#d4af37" opacity="0.3"/>
-      <text x="200" y="85" textAnchor="middle" fill="#d4af37" fontSize="20" fontFamily="Georgia">N</text>
-      <ellipse cx="200" cy="60" rx="30" ry="10" fill="none" stroke="#d4af37" strokeWidth="1.5"/>
-      {[160,180,200,220,240].map((x,i) => <circle key={i} cx={x} cy={130+i*5} r="3" fill="#d4af37" opacity="0.6"/>)}
-      <text x="200" y="170" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">GLOIRE</text>
-      <text x="200" y="185" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">EMPEREUR</text>
-      <text x="200" y="200" textAnchor="middle" fill="#d4af37" fontSize="9" fontFamily="Georgia">DES FRANÇAIS</text>
-      <text x="200" y="235" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">Наполеоновская легенда</text>
+      {/* Poster background */}
+      <rect x="100" y="20" width="200" height="210" fill="rgba(245,239,224,0.05)" rx="10" stroke="#d4af37" strokeWidth="2.5"/>
+      <rect x="105" y="25" width="190" height="200" fill="none" stroke="#d4af37" strokeWidth="1" opacity="0.3" rx="8"/>
+      {/* Radiant glow */}
+      <circle cx="200" cy="90" r="60" fill="url(#glow)"/>
+      {/* Laurel wreath */}
+      <ellipse cx="200" cy="75" rx="35" ry="40" fill="none" stroke="#d4af37" strokeWidth="2"/>
+      <path d="M165,75 Q170,60 180,55 Q175,65 170,75" fill="#d4af37" opacity="0.6"/>
+      <path d="M235,75 Q230,60 220,55 Q225,65 230,75" fill="#d4af37" opacity="0.6"/>
+      <path d="M170,95 Q175,105 185,110 Q180,100 175,90" fill="#d4af37" opacity="0.6"/>
+      <path d="M230,95 Q225,105 215,110 Q220,100 225,90" fill="#d4af37" opacity="0.6"/>
+      {/* Imperial N */}
+      <circle cx="200" cy="85" r="20" fill="#d4af37" opacity="0.3"/>
+      <text x="200" y="93" textAnchor="middle" fill="#d4af37" fontSize="28" fontFamily="Georgia" fontWeight="bold">N</text>
+      {/* Crown */}
+      <path d="M180,50 L185,35 L190,45 L195,30 L200,45 L205,30 L210,45 L215,35 L220,50" fill="none" stroke="#d4af37" strokeWidth="2"/>
+      <circle cx="200" cy="30" r="3" fill="#d4af37"/>
+      {/* Bees */}
+      {[140,160,240,260].map((x,i) => <ellipse key={i} cx={x} cy={130+i*3} rx="4" ry="2.5" fill="#d4af37" opacity="0.5"/>)}
+      {/* Text */}
+      <text x="200" y="160" textAnchor="middle" fill="#d4af37" fontSize="14" fontFamily="Georgia" fontWeight="bold">GLOIRE</text>
+      <text x="200" y="178" textAnchor="middle" fill="#d4af37" fontSize="12" fontFamily="Georgia">EMPEREUR</text>
+      <text x="200" y="195" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">DES FRANÇAIS</text>
+      <text x="200" y="240" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">Наполеоновская легенда</text>
     </svg>
   ),
   austerlitz: (
@@ -134,19 +179,44 @@ const SVGIllustrations: Record<string, React.ReactNode> = {
   ),
   blockade: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a3a5a"/>
+          <stop offset="100%" stopColor="#0d2040"/>
+        </linearGradient>
+      </defs>
       <rect width="400" height="250" fill="#1a1f3a"/>
-      <rect x="0" y="150" width="400" height="100" fill="#1a3a5a" opacity="0.5"/>
-      <path d="M0,160 Q100,140 200,160 Q300,180 400,160" fill="none" stroke="#2a5a8a" strokeWidth="2"/>
-      <path d="M0,170 Q100,150 200,170 Q300,190 400,170" fill="none" stroke="#2a5a8a" strokeWidth="1.5"/>
-      <rect x="100" y="100" width="60" height="50" fill="#4a3a2a" rx="2"/>
-      <polygon points="100,100 130,70 160,100" fill="#5a4a3a"/>
-      <line x1="130" y1="70" x2="130" y2="50" stroke="#8a7a6a" strokeWidth="2"/>
-      <rect x="240" y="110" width="50" height="40" fill="#4a3a2a" rx="2"/>
-      <polygon points="240,110 265,85 290,110" fill="#5a4a3a"/>
-      <line x1="265" y1="85" x2="265" y2="65" stroke="#8a7a6a" strokeWidth="2"/>
-      <line x1="160" y1="130" x2="240" y2="130" stroke="#d4af37" strokeWidth="2" strokeDasharray="5,5"/>
-      <text x="200" y="145" textAnchor="middle" fill="#d4af37" fontSize="8">БЛОКАДА</text>
-      <text x="200" y="235" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">Континентальная блокада</text>
+      <rect x="0" y="120" width="400" height="130" fill="url(#ocean)"/>
+      <path d="M0,130 Q50,120 100,130 Q150,140 200,130 Q250,120 300,130 Q350,140 400,130" fill="none" stroke="#2a5a8a" strokeWidth="2" opacity="0.6"/>
+      <path d="M0,145 Q50,135 100,145 Q150,155 200,145 Q250,135 300,145 Q350,155 400,145" fill="none" stroke="#2a5a8a" strokeWidth="1.5" opacity="0.4"/>
+      <path d="M0,160 Q50,150 100,160 Q150,170 200,160 Q250,150 300,160 Q350,170 400,160" fill="none" stroke="#2a5a8a" strokeWidth="1" opacity="0.3"/>
+      {/* French ship */}
+      <g transform="translate(80,80)">
+        <rect x="0" y="20" width="60" height="30" fill="#4a3a2a" rx="3"/>
+        <polygon points="0,20 30,-10 60,20" fill="#5a4a3a"/>
+        <line x1="30" y1="-10" x2="30" y2="-30" stroke="#8a7a6a" strokeWidth="2"/>
+        <rect x="25" y="-30" width="15" height="10" fill="#7b1e2b"/>
+        <rect x="10" y="25" width="8" height="8" fill="#d4af37" opacity="0.5"/>
+        <rect x="42" y="25" width="8" height="8" fill="#d4af37" opacity="0.5"/>
+      </g>
+      {/* British ship */}
+      <g transform="translate(260,85)">
+        <rect x="0" y="20" width="55" height="28" fill="#3a3a4a" rx="3"/>
+        <polygon points="0,20 27,-8 55,20" fill="#4a4a5a"/>
+        <line x1="27" y1="-8" x2="27" y2="-25" stroke="#8a8a9a" strokeWidth="2"/>
+        <rect x="22" y="-25" width="14" height="9" fill="#1a3a6a"/>
+        <rect x="8" y="24" width="7" height="7" fill="#d4af37" opacity="0.5"/>
+        <rect x="40" y="24" width="7" height="7" fill="#d4af37" opacity="0.5"/>
+      </g>
+      {/* Chain blockade */}
+      <line x1="140" y1="110" x2="260" y2="110" stroke="#d4af37" strokeWidth="3" strokeDasharray="8,4"/>
+      <text x="200" y="105" textAnchor="middle" fill="#d4af37" fontSize="9" fontFamily="Georgia" fontWeight="bold">БЛОКАДА</text>
+      {/* Crossed swords */}
+      <g transform="translate(190,195)">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#d4af37" strokeWidth="2"/>
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#d4af37" strokeWidth="2"/>
+      </g>
+      <text x="200" y="240" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">Континентальная блокада 1806</text>
     </svg>
   ),
   tilsit: (
@@ -167,28 +237,69 @@ const SVGIllustrations: Record<string, React.ReactNode> = {
   ),
   guerrilla: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#3a4a3a"/>
+          <stop offset="100%" stopColor="#1a2a1a"/>
+        </linearGradient>
+      </defs>
       <rect width="400" height="250" fill="#1a1f3a"/>
-      <polygon points="0,200 50,120 100,180 150,100 200,160 250,90 300,150 350,110 400,200" fill="#2a3a2a"/>
-      <polygon points="0,250 50,180 100,220 150,160 200,200 250,150 300,190 350,170 400,250" fill="#1a2a1a"/>
-      {[80,150,220,300].map((x,i) => <g key={i}><circle cx={x} cy={180-i*5} r="4" fill="#7b1e2b"/><line x1={x} y1={184-i*5} x2={x} y2={200-i*5} stroke="#7b1e2b" strokeWidth="2"/></g>)}
-      {[120,200,280].map((x,i) => <g key={i}><rect x={x-3} y={150+i*10} width="6" height="20" fill="#d4af37" opacity="0.6"/><polygon points={`${x-8},${150+i*10} ${x},${140+i*10} ${x+8},${150+i*10}`} fill="#d4af37" opacity="0.4"/></g>)}
-      <text x="200" y="240" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">Испанская герилья 1808</text>
+      {/* Mountains */}
+      <polygon points="0,180 40,100 80,140 120,80 160,130 200,70 240,120 280,90 320,140 360,100 400,180" fill="url(#mountain)"/>
+      <polygon points="0,200 60,140 120,170 180,120 240,160 300,130 360,170 400,200 400,250 0,250" fill="#1a2a1a"/>
+      {/* Trees */}
+      {[50,130,270,350].map((x,i) => <g key={i}><polygon points={`${x},${160+i*5} ${x-8},${180+i*5} ${x+8},${180+i*5}`} fill="#2a3a2a"/><rect x={x-1} y={180+i*5} width="2" height="10" fill="#3a2a1a"/></g>)}
+      {/* Guerrilla fighters */}
+      {[90,170,250,330].map((x,i) => <g key={i}>
+        <circle cx={x} cy={170-i*3} r="5" fill="#7b1e2b"/>
+        <line x1={x} y1={175-i*3} x2={x} y2={195-i*3} stroke="#7b1e2b" strokeWidth="3"/>
+        <line x1={x-5} y1={180-i*3} x2={x+5} y2={180-i*3} stroke="#7b1e2b" strokeWidth="2"/>
+        <line x1={x+3} y1={175-i*3} x2={x+12} y2={170-i*3} stroke="#888" strokeWidth="1.5"/>
+      </g>)}
+      {/* French soldiers ambushed */}
+      {[150,230].map((x,i) => <g key={i}>
+        <rect x={x-4} y={155+i*5} width="8" height="20" fill="#1a3a6a" rx="1"/>
+        <circle cx={x} cy={150+i*5} r="4" fill="#f5efe0" opacity="0.8"/>
+      </g>)}
+      {/* Smoke from shots */}
+      <circle cx="160" cy="160" r="6" fill="#888" opacity="0.3"/>
+      <circle cx="240" cy="165" r="5" fill="#888" opacity="0.3"/>
+      <text x="200" y="240" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">Испанская герилья 1808</text>
     </svg>
   ),
   preparation: (
     <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="doc" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5efe0" stopOpacity="0.15"/>
+          <stop offset="100%" stopColor="#e5d5b0" stopOpacity="0.1"/>
+        </linearGradient>
+      </defs>
       <rect width="400" height="250" fill="#1a1f3a"/>
-      <rect x="100" y="40" width="200" height="140" fill="#2a2a3a" rx="8"/>
-      <rect x="120" y="60" width="160" height="100" fill="#f5efe0" opacity="0.1" rx="4"/>
-      <text x="200" y="85" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">ЗАВЕЩАНИЕ</text>
-      <text x="200" y="100" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">ПЕТРА ВЕЛИКОГО</text>
-      <line x1="140" y1="110" x2="260" y2="110" stroke="#d4af37" strokeWidth="0.5" opacity="0.5"/>
-      <line x1="140" y1="120" x2="260" y2="120" stroke="#d4af37" strokeWidth="0.5" opacity="0.5"/>
-      <line x1="140" y1="130" x2="260" y2="130" stroke="#d4af37" strokeWidth="0.5" opacity="0.5"/>
-      <line x1="140" y1="140" x2="220" y2="140" stroke="#d4af37" strokeWidth="0.5" opacity="0.5"/>
-      <circle cx="200" cy="155" r="5" fill="#7b1e2b"/>
-      <text x="200" y="210" textAnchor="middle" fill="#7b1e2b" fontSize="10" fontFamily="Georgia">⚠ Фальсификация</text>
-      <text x="200" y="235" textAnchor="middle" fill="#d4af37" fontSize="10" fontFamily="Georgia">Пропаганда 1811</text>
+      {/* Document */}
+      <rect x="90" y="30" width="220" height="160" fill="url(#doc)" rx="6" stroke="#d4af37" strokeWidth="2"/>
+      <rect x="95" y="35" width="210" height="150" fill="none" stroke="#d4af37" strokeWidth="0.5" opacity="0.3" rx="4"/>
+      {/* Double-headed eagle */}
+      <g transform="translate(200,60)">
+        <path d="M-15,0 L-10,-10 L-5,-5 L0,-15 L5,-5 L10,-10 L15,0 L10,5 L5,0 L0,10 L-5,0 L-10,5 Z" fill="#d4af37" opacity="0.6"/>
+        <circle cx="-8" cy="-3" r="2" fill="#1a1f3a"/>
+        <circle cx="8" cy="-3" r="2" fill="#1a1f3a"/>
+      </g>
+      {/* Title */}
+      <text x="200" y="95" textAnchor="middle" fill="#d4af37" fontSize="13" fontFamily="Georgia" fontWeight="bold">ЗАВЕЩАНИЕ</text>
+      <text x="200" y="112" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">ПЕТРА ВЕЛИКОГО</text>
+      {/* Text lines */}
+      <line x1="120" y1="125" x2="280" y2="125" stroke="#d4af37" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="135" x2="280" y2="135" stroke="#d4af37" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="145" x2="260" y2="145" stroke="#d4af37" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="155" x2="240" y2="155" stroke="#d4af37" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="120" y1="165" x2="200" y2="165" stroke="#d4af37" strokeWidth="0.5" opacity="0.4"/>
+      {/* Warning seal */}
+      <circle cx="200" cy="175" r="8" fill="#7b1e2b"/>
+      <text x="200" y="179" textAnchor="middle" fill="#f5efe0" fontSize="10" fontWeight="bold">!</text>
+      {/* Warning text */}
+      <text x="200" y="210" textAnchor="middle" fill="#e85d75" fontSize="11" fontFamily="Georgia" fontWeight="bold">⚠ ФАЛЬСИФИКАЦИЯ</text>
+      <text x="200" y="240" textAnchor="middle" fill="#d4af37" fontSize="11" fontFamily="Georgia">Пропаганда 1811 года</text>
     </svg>
   ),
   borodino: (
@@ -496,7 +607,7 @@ export default function App() {
 function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, onDownload, soundEnabled, setSoundEnabled }: any) {
   const hasSave = !!localStorage.getItem('napoleon_game_save');
   return (
-    <div className="main-menu flex flex-col items-center justify-center min-h-screen p-4 relative">
+    <div className="main-menu imperial-bg flex flex-col items-center justify-center min-h-screen p-4 relative">
       <div className="menu-bg-pattern"></div>
       
       {/* Animated bees */}
@@ -510,15 +621,44 @@ function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, onDownload
         <svg width="20" height="20" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="5" fill="#d4af37"/></svg>
       </div>
 
-      {/* Napoleon portrait silhouette */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-        {SVGIllustrations.menu_napoleon}
+      {/* Napoleon portrait background */}
+      <div className="menu-portrait" style={{backgroundImage: `url(${SCENE_IMAGES.menu_napoleon})`}}></div>
+
+      {/* Decorative ornaments */}
+      <div className="absolute top-0 left-0 w-full h-1" style={{background: 'linear-gradient(90deg, transparent, var(--gold), transparent)'}}></div>
+      <div className="absolute bottom-0 left-0 w-full h-1" style={{background: 'linear-gradient(90deg, transparent, var(--gold), transparent)'}}></div>
+      
+      {/* Corner ornaments */}
+      <div className="absolute top-4 left-4 opacity-30">
+        <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0,0 L60,0 L60,5 L5,5 L5,60 L0,60 Z" fill="#d4af37"/><circle cx="10" cy="10" r="3" fill="#d4af37"/></svg>
+      </div>
+      <div className="absolute top-4 right-4 opacity-30" style={{transform: 'scaleX(-1)'}}>
+        <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0,0 L60,0 L60,5 L5,5 L5,60 L0,60 Z" fill="#d4af37"/><circle cx="10" cy="10" r="3" fill="#d4af37"/></svg>
+      </div>
+      <div className="absolute bottom-4 left-4 opacity-30" style={{transform: 'scaleY(-1)'}}>
+        <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0,0 L60,0 L60,5 L5,5 L5,60 L0,60 Z" fill="#d4af37"/><circle cx="10" cy="10" r="3" fill="#d4af37"/></svg>
+      </div>
+      <div className="absolute bottom-4 right-4 opacity-30" style={{transform: 'scale(-1,-1)'}}>
+        <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0,0 L60,0 L60,5 L5,5 L5,60 L0,60 Z" fill="#d4af37"/><circle cx="10" cy="10" r="3" fill="#d4af37"/></svg>
       </div>
 
       {/* Content */}
       <div className="relative z-10 text-center animate-fadeIn max-w-md w-full">
-        <div className="mb-2 opacity-60 text-sm tracking-widest uppercase" style={{color: 'var(--gold)'}}>§21–22 • 8 класс • История</div>
+        {/* Imperial crown decoration */}
+        <div className="mb-4 animate-float">
+          <svg width="60" height="40" viewBox="0 0 60 40" className="mx-auto">
+            <path d="M10,35 L15,15 L20,25 L25,10 L30,25 L35,10 L40,25 L45,15 L50,35 Z" fill="none" stroke="#d4af37" strokeWidth="2"/>
+            <circle cx="30" cy="10" r="4" fill="#d4af37"/>
+            <line x1="10" y1="35" x2="50" y2="35" stroke="#d4af37" strokeWidth="2"/>
+          </svg>
+        </div>
+        <div className="mb-2 opacity-70 text-sm tracking-[0.3em] uppercase font-semibold" style={{color: 'var(--gold)'}}>§21–22 • 8 класс • История</div>
         <h1 className="menu-title mb-2">НАПОЛЕОН</h1>
+        <div className="flex items-center justify-center gap-3 mb-1">
+          <div className="h-px flex-1 max-w-16" style={{background: 'linear-gradient(90deg, transparent, var(--gold))'}}></div>
+          <span className="text-lg" style={{color: 'var(--gold)'}}>⚜</span>
+          <div className="h-px flex-1 max-w-16" style={{background: 'linear-gradient(90deg, var(--gold), transparent)'}}></div>
+        </div>
         <p className="menu-subtitle mb-8">Путь Империи</p>
 
         <div className="space-y-2">
@@ -538,8 +678,18 @@ function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, onDownload
           </button>
         </div>
 
-        <div className="mt-8 italic opacity-50 text-sm" style={{color: 'var(--cream)'}}>
-          «История — это набор истин, ставших событиями»
+        {/* Decorative divider */}
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="h-px w-16" style={{background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.5))'}}></div>
+          <span style={{color: 'var(--gold)', opacity: 0.6}}>🐝</span>
+          <div className="h-px w-16" style={{background: 'linear-gradient(90deg, rgba(212,175,55,0.5), transparent)'}}></div>
+        </div>
+        
+        <div className="mt-6 px-8">
+          <blockquote className="italic opacity-60 text-sm leading-relaxed" style={{color: 'var(--cream)'}}>
+            «История — это набор истин, ставших событиями»
+          </blockquote>
+          <div className="mt-2 text-xs opacity-40" style={{color: 'var(--gold)'}}>— Наполеон Бонапарт</div>
         </div>
       </div>
     </div>
@@ -565,11 +715,21 @@ function CharacterCreation({ onComplete, onBack }: { onComplete: (name: string, 
   ];
 
   return (
-    <div className="min-h-screen p-4 flex items-center justify-center animate-fadeIn">
+    <div className="min-h-screen p-4 flex items-center justify-center animate-fadeIn" style={{background: 'radial-gradient(ellipse at top, rgba(212,175,55,0.08) 0%, transparent 60%), var(--navy)'}}>
       <div className="max-w-lg w-full">
-        <h2 className="text-3xl font-bold text-center mb-8" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>
-          Создание персонажа
-        </h2>
+        <div className="text-center mb-8">
+          <div className="inline-block p-4 rounded-full mb-4" style={{background: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.3)'}}>
+            <svg width="48" height="48" viewBox="0 0 48 48">
+              <circle cx="24" cy="18" r="10" fill="none" stroke="#d4af37" strokeWidth="2"/>
+              <path d="M8,44 C8,32 16,26 24,26 C32,26 40,32 40,44" fill="none" stroke="#d4af37" strokeWidth="2"/>
+              <circle cx="24" cy="10" r="3" fill="#d4af37"/>
+            </svg>
+          </div>
+          <h2 className="text-3xl font-bold" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>
+            Создание персонажа
+          </h2>
+          <p className="opacity-60 mt-2 text-sm">Определите свою роль в истории Империи</p>
+        </div>
 
         <div className="scene-card mb-6">
           <label className="block text-sm mb-2 opacity-80">Ваше имя:</label>
@@ -647,22 +807,29 @@ function GameScreen({ player, scenes, onChoice, showCommentary, onAdvance, onFin
     <div className="min-h-screen">
       {/* HUD */}
       <div className="hud-bar">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-bold" style={{color: 'var(--gold)'}}>{player.name}</span>
-            <span className="text-xs opacity-60">Акт {currentScene.act}/5</span>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full" style={{background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)'}}>
+              <span className="text-lg">{player.role === 'officer' ? '⚔️' : player.role === 'official' ? '📋' : '🤝'}</span>
+              <span className="text-sm font-bold" style={{color: 'var(--gold)'}}>{player.name}</span>
+            </div>
+            <div className="badge">
+              <span>Акт {currentScene.act}/5</span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={() => setTextSpeed(textSpeed === 1 ? 2 : 1)} className="text-xs opacity-60 hover:opacity-100" style={{color: 'var(--gold)'}}>
+            <button onClick={() => setTextSpeed(textSpeed === 1 ? 2 : 1)} className="p-2 rounded-lg hover:scale-110 transition-transform" style={{background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)'}} title="Скорость текста">
               {textSpeed === 1 ? '🐢' : '🐇'}
             </button>
-            <button onClick={() => setSoundEnabled(!soundEnabled)} className="text-xs opacity-60 hover:opacity-100" style={{color: 'var(--gold)'}}>
+            <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-2 rounded-lg hover:scale-110 transition-transform" style={{background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)'}} title="Звук">
               {soundEnabled ? '🔊' : '🔇'}
             </button>
-            <button onClick={onMenu} className="text-xs opacity-60 hover:opacity-100" style={{color: 'var(--gold)'}}>☰</button>
+            <button onClick={onMenu} className="p-2 rounded-lg hover:scale-110 transition-transform" style={{background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)'}} title="Меню">
+              ☰
+            </button>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-2 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
           <ResourceBar label={player.role === 'officer' ? '⚔️ Слава' : player.role === 'official' ? '📋 Влияние' : '🤝 Дипломатия'} value={player.fame} color="#d4af37" />
           <ResourceBar label="💰 Богатство" value={player.wealth} color="#2dd4bf" />
           <ResourceBar label="👑 Репутация" value={player.reputation} color="#a78bfa" />
@@ -676,27 +843,38 @@ function GameScreen({ player, scenes, onChoice, showCommentary, onAdvance, onFin
       <div className="max-w-2xl mx-auto p-4 animate-fadeIn">
         {/* Year badge */}
         {currentScene.year && (
-          <div className="text-center mb-4">
-            <span className="inline-block px-4 py-1 rounded-full text-sm" style={{background: 'rgba(212,175,55,0.15)', color: 'var(--gold)', border: '1px solid rgba(212,175,55,0.3)'}}>
-              {currentScene.year}
+          <div className="text-center mb-4 animate-slideDown">
+            <span className="year-badge">
+              📅 {currentScene.year}
             </span>
           </div>
         )}
 
         {/* Title */}
-        <h2 className="text-2xl font-bold text-center mb-4" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>
+        <h2 className="text-3xl font-bold text-center mb-6 animate-textGlow" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>
           {currentScene.title}
         </h2>
+        
+        {/* Decorative divider */}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="h-px flex-1 max-w-20" style={{background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.5))'}}></div>
+          <span style={{color: 'var(--gold)', opacity: 0.6}}>⚜</span>
+          <div className="h-px flex-1 max-w-20" style={{background: 'linear-gradient(90deg, rgba(212,175,55,0.5), transparent)'}}></div>
+        </div>
 
         {/* Illustration */}
         <div className="scene-illustration animate-float">
-          {SVGIllustrations[currentScene.svgId] || SVGIllustrations.brumaire}
+          {SCENE_IMAGES[currentScene.svgId] ? (
+            <img src={SCENE_IMAGES[currentScene.svgId]} alt={currentScene.title} loading="lazy" />
+          ) : (
+            SVGIllustrations[currentScene.svgId] || SVGIllustrations.brumaire
+          )}
         </div>
 
         {/* Text */}
-        <div className="scene-card">
+        <div className="scene-card card-imperial">
           {currentScene.text.map((paragraph: string, i: number) => (
-            <p key={i} className="mb-4 leading-relaxed" style={{fontSize: '1.05rem', lineHeight: 1.7}}>
+            <p key={i} className="mb-4 leading-relaxed text-imperial" style={{fontSize: '1.05rem', lineHeight: 1.8}}>
               {paragraph}
             </p>
           ))}
@@ -704,11 +882,16 @@ function GameScreen({ player, scenes, onChoice, showCommentary, onAdvance, onFin
 
         {/* Choices */}
         {!showCommentary && (
-          <div className="mt-6 animate-slideUp">
-            <h3 className="text-lg font-bold mb-3" style={{color: 'var(--gold)', fontFamily: 'Georgia'}}>Ваше решение:</h3>
+          <div className="mt-8 animate-slideUp">
+            <div className="imperial-divider mb-4">
+              <span className="badge">Ваше решение</span>
+            </div>
             {shuffleArray(currentScene.choices.map((c: Choice, i: number) => ({...c, origIdx: i}))).map((choice: any, i: number) => (
-              <button key={i} onClick={() => onChoice(sceneIdx, choice.origIdx)} className="choice-btn">
-                {choice.text}
+              <button key={i} onClick={() => onChoice(sceneIdx, choice.origIdx)} className="choice-btn hover-lift">
+                <span className="flex items-start gap-3">
+                  <span className="text-xl opacity-60">{i === 0 ? 'Ⅰ' : i === 1 ? 'Ⅱ' : i === 2 ? 'Ⅲ' : 'Ⅳ'}</span>
+                  <span className="flex-1">{choice.text}</span>
+                </span>
               </button>
             ))}
           </div>
@@ -716,23 +899,29 @@ function GameScreen({ player, scenes, onChoice, showCommentary, onAdvance, onFin
 
         {/* Commentary */}
         {showCommentary && (
-          <div className="commentary-box animate-slideUp mt-6">
-            <div className="flex items-start gap-2">
-              <span className="text-xl">📚</span>
-              <div>
-                <h4 className="font-bold mb-2" style={{color: 'var(--gold)'}}>Как было на самом деле:</h4>
-                <p className="italic opacity-90">{showCommentary}</p>
+          <div className="commentary-box animate-slideUp mt-8 glow-gold">
+            <div className="flex items-start gap-3">
+              <div className="text-3xl animate-float">📚</div>
+              <div className="flex-1">
+                <h4 className="font-bold mb-2 text-lg heading-imperial" style={{color: 'var(--gold)'}}>Как было на самом деле:</h4>
+                <p className="italic opacity-90 leading-relaxed text-imperial">{showCommentary}</p>
               </div>
             </div>
-            <button onClick={onAdvance} className="seal-btn mt-4 w-full justify-center">
-              Продолжить →
+            <button onClick={onAdvance} className="seal-btn mt-6 w-full justify-center animate-glow">
+              Продолжить путь →
             </button>
           </div>
         )}
 
         {/* Progress */}
-        <div className="mt-6 text-center opacity-50 text-sm">
-          Сцена {sceneIdx + 1} из {scenes.length}
+        <div className="mt-8 mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs opacity-60">Прогресс</span>
+            <span className="text-xs opacity-60">Сцена {sceneIdx + 1} из {scenes.length}</span>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{width: `${((sceneIdx + 1) / scenes.length) * 100}%`}}></div>
+          </div>
         </div>
       </div>
     </div>
@@ -741,13 +930,13 @@ function GameScreen({ player, scenes, onChoice, showCommentary, onAdvance, onFin
 
 function ResourceBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <div>
-      <div className="flex justify-between mb-0.5">
-        <span className="opacity-80">{label}</span>
-        <span className="font-bold">{value}</span>
+    <div className="stat-card hover-lift">
+      <div className="flex justify-between mb-1.5">
+        <span className="opacity-90 text-xs font-medium">{label}</span>
+        <span className="font-bold text-sm" style={{color}}>{value}</span>
       </div>
       <div className="resource-bar">
-        <div className="resource-fill" style={{width: `${value}%`, background: color}}></div>
+        <div className="resource-fill" style={{width: `${value}%`, background: `linear-gradient(90deg, ${color}, ${color}dd)`, boxShadow: `0 0 10px ${color}60`}}></div>
       </div>
     </div>
   );
@@ -1015,14 +1204,29 @@ function EndingScreen({ player, ending, grade, onRestart, onReport, onDownload }
   const endingData = ENDINGS[ending as keyof typeof ENDINGS];
   const correct = player.decisions.filter((d: any) => d.correct).length;
   const total = player.decisions.length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 animate-fadeIn">
+    <div className="min-h-screen flex items-center justify-center p-4 animate-fadeIn" style={{background: 'radial-gradient(ellipse at center, rgba(212,175,55,0.1) 0%, transparent 60%), var(--navy)'}}>
       <div className="max-w-lg w-full">
-        <div className="scene-card text-center">
-          <div className="text-5xl mb-4">{ending === 'hero' ? '🏆' : ending === 'pragmatist' ? '🎭' : ending === 'traitor' ? '🗡️' : ending === 'victim' ? '💀' : ending === 'diplomat' ? '🤝' : '😔'}</div>
-          <h2 className="text-3xl font-bold mb-2" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>{endingData.title}</h2>
-          <p className="mb-6 opacity-90 leading-relaxed">{endingData.description}</p>
+        <div className="scene-card text-center animate-popIn">
+          {/* Decorative top border */}
+          <div className="h-1 rounded-full mb-6" style={{background: 'linear-gradient(90deg, transparent, var(--gold), transparent)'}}></div>
+          
+          <div className="text-6xl mb-4 animate-float">{ending === 'hero' ? '🏆' : ending === 'pragmatist' ? '🎭' : ending === 'traitor' ? '🗡️' : ending === 'victim' ? '💀' : ending === 'diplomat' ? '🤝' : '😔'}</div>
+          <div className="text-sm uppercase tracking-widest opacity-60 mb-2" style={{color: 'var(--gold)'}}>Ваша судьба</div>
+          <h2 className="text-3xl font-bold mb-4" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>{endingData.title}</h2>
+          <p className="mb-6 opacity-90 leading-relaxed italic">{endingData.description}</p>
+          
+          {/* Score circle */}
+          <div className="flex justify-center mb-6">
+            <div className="relative w-24 h-24 rounded-full flex items-center justify-center animate-borderGlow" style={{border: '3px solid var(--gold)', background: 'rgba(212,175,55,0.1)'}}>
+              <div className="text-center">
+                <div className="text-2xl font-bold" style={{color: 'var(--gold)'}}>{pct}%</div>
+                <div className="text-xs opacity-60">верных</div>
+              </div>
+            </div>
+          </div>
 
           <div className="grid grid-cols-2 gap-3 mb-6 text-sm">
             <div className="p-3 rounded" style={{background: 'rgba(212,175,55,0.1)'}}>
@@ -1331,13 +1535,20 @@ function TeacherModerateContent() {
 // ============ RULES ============
 function RulesScreen({ onBack }: { onBack: () => void }) {
   return (
-    <div className="min-h-screen p-4 animate-fadeIn">
+    <div className="min-h-screen p-4 animate-fadeIn" style={{background: 'radial-gradient(ellipse at top, rgba(212,175,55,0.05) 0%, transparent 60%), var(--navy)'}}>
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-6" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>📜 Правила игры</h2>
-        <div className="scene-card space-y-4">
+        <div className="text-center mb-8">
+          <div className="inline-block p-4 rounded-full mb-4" style={{background: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.3)'}}>
+            <span className="text-4xl">📜</span>
+          </div>
+          <h2 className="text-3xl font-bold" style={{fontFamily: 'Georgia, serif', color: 'var(--gold)'}}>Правила игры</h2>
+        </div>
+        <div className="scene-card space-y-5">
           <div>
-            <h3 className="font-bold mb-2" style={{color: 'var(--gold)'}}>🎯 Цель</h3>
-            <p className="opacity-90">Прожить эпоху Наполеона через призму вашего персонажа, принимая исторически обоснованные решения. Игра основана на §21-22 учебника истории для 8 класса.</p>
+            <h3 className="font-bold mb-2 flex items-center gap-2" style={{color: 'var(--gold)'}}>
+              <span className="text-xl">🎯</span> Цель
+            </h3>
+            <p className="opacity-90 leading-relaxed">Прожить эпоху Наполеона через призму вашего персонажа, принимая исторически обоснованные решения. Игра основана на §21-22 учебника истории для 8 класса.</p>
           </div>
           <div>
             <h3 className="font-bold mb-2" style={{color: 'var(--gold)'}}>🎭 Персонаж</h3>
