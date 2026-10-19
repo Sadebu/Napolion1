@@ -573,26 +573,14 @@ export default function App() {
     setScreen('game');
   };
 
-  const downloadGame = () => {
-    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Napoleon_Put_Imperii_8klass.html';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
-  };
-
   // ============ RENDER ============
   return (
     <div className="min-h-screen paper-bg">
-      {screen === 'menu' && <MainMenu onStart={startNewGame} onContinue={continueGame} onTeacher={() => setScreen('teacher')} onRules={() => setScreen('rules')} onAbout={() => setScreen('about')} onDownload={downloadGame} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />}
+      {screen === 'menu' && <MainMenu onStart={startNewGame} onContinue={continueGame} onTeacher={() => setScreen('teacher')} onRules={() => setScreen('rules')} onAbout={() => setScreen('about')} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />}
       {screen === 'create' && <CharacterCreation onComplete={startCharacterCreation} onBack={() => setScreen('menu')} />}
       {screen === 'game' && <GameScreen player={player} scenes={getVisibleScenes()} onChoice={makeChoice} showCommentary={showCommentary} onAdvance={advanceAfterCommentary} onFinish={finishGame} textSpeed={textSpeed} setTextSpeed={setTextSpeed} soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} onMenu={() => setScreen('menu')} />}
       {screen === 'minigame' && minigameActive && <MinigameScreen gameId={minigameActive} onComplete={handleMinigameComplete} onSkip={() => { setMinigameActive(null); setScreen('game'); }} />}
-      {screen === 'ending' && <EndingScreen player={player} ending={determineEnding(player)} grade={calculateGrade(player)} onRestart={() => { localStorage.removeItem('napoleon_game_save'); setPlayer({...DEFAULT_STATE}); setScreen('menu'); }} onReport={() => setScreen('teacher')} onDownload={downloadGame} />}
+      {screen === 'ending' && <EndingScreen player={player} ending={determineEnding(player)} grade={calculateGrade(player)} onRestart={() => { localStorage.removeItem('napoleon_game_save'); setPlayer({...DEFAULT_STATE}); setScreen('menu'); }} onReport={() => setScreen('teacher')} />}
       {screen === 'teacher' && !teacherAuth && <TeacherLogin onAuth={() => { setTeacherAuth(true); setScreen('teacherScale'); }} onBack={() => setScreen('menu')} />}
       {screen === 'teacher' && teacherAuth && <TeacherScale onBack={() => { setTeacherAuth(false); setScreen('menu'); }} />}
       {screen === 'teacherScale' && teacherAuth && <TeacherScale onBack={() => { setTeacherAuth(false); setScreen('menu'); }} />}
@@ -604,7 +592,7 @@ export default function App() {
 }
 
 // ============ MAIN MENU ============
-function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, onDownload, soundEnabled, setSoundEnabled }: any) {
+function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, soundEnabled, setSoundEnabled }: any) {
   const hasSave = !!localStorage.getItem('napoleon_game_save');
   return (
     <div className="main-menu imperial-bg flex flex-col items-center justify-center min-h-screen p-4 relative">
@@ -669,7 +657,6 @@ function MainMenu({ onStart, onContinue, onTeacher, onRules, onAbout, onDownload
           <button className="menu-btn" onClick={onTeacher}>👨‍🏫 Режим учителя</button>
           <button className="menu-btn" onClick={onRules}>📜 Правила</button>
           <button className="menu-btn" onClick={onAbout}>ℹ️ Об игре</button>
-          <button className="menu-btn" onClick={onDownload}>⬇️ Скачать игру</button>
         </div>
 
         <div className="mt-8 flex items-center justify-center gap-4">
@@ -1200,7 +1187,7 @@ function ChronologyGame({ onFinish }: { onFinish: (score: number) => void }) {
 }
 
 // ============ ENDING SCREEN ============
-function EndingScreen({ player, ending, grade, onRestart, onReport, onDownload }: any) {
+function EndingScreen({ player, ending, grade, onRestart, onReport }: any) {
   const endingData = ENDINGS[ending as keyof typeof ENDINGS];
   const correct = player.decisions.filter((d: any) => d.correct).length;
   const total = player.decisions.length;
@@ -1259,7 +1246,6 @@ function EndingScreen({ player, ending, grade, onRestart, onReport, onDownload }
           <div className="space-y-2">
             <button onClick={onRestart} className="seal-btn w-full justify-center">🔄 Пройти заново</button>
             <button onClick={onReport} className="seal-btn w-full justify-center">📋 Отчёт для учителя</button>
-            <button onClick={onDownload} className="seal-btn w-full justify-center">⬇️ Скачать игру</button>
           </div>
         </div>
       </div>
