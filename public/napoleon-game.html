@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Наполеон: Путь Империи — §21-22, 8 класс</title>
+<style>
+/* ═══════════════ RESET & BASE ═══════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--navy:#1a1f3a;--gold:#d4af37;--burgundy:#7b1e2b;--cream:#f5efe0;
+--dark:#0d1020;--teal:#2dd4bf;--red:#e53e3e;--green:#38a169;
+--font-head:Georgia,'Times New Roman',serif;
+--font-body:'Segoe UI',Tahoma,Arial,sans-serif;
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-body);font-size:16px;line-height:1.6;background:var(--dark);color:var(--cream)}
+button{font-family:inherit;cursor:pointer;border:none;outline:none}
+input,textarea{font-family:inherit;font-size:16px}
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(212,175,55,.4)}50%{box-shadow:0 0 20px rgba(212,175,55,.8)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes flicker{0%,100%{opacity:1}25%{opacity:.7}50%{opacity:.9}75%{opacity:.6}}
+@keyframes march{0%{transform:translateX(-5px)}50%{transform:translateX(5px)}100%{transform:translateX(-5px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes goldShimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes beeFloat{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-15px) rotate(5deg)}75%{transform:translateY(-8px) rotate(-3deg)}}
+@keyframes eagleFly{0%{transform:translateX(-100px) translateY(20px)}50%{transform:translateX(50vw) translateY(-30px)}100%{transform:translateX(100vw) translateY(10px)}}
+/* ═══════════════ SCREENS ═══════════════ */
+.screen{display:none;width:100%;height:100%;position:absolute;top:0;left:0;overflow-y:auto;overflow-x:hidden}
+.screen.active{display:block;animation:fadeIn .5s ease}
+/* ═══════════════ PAPER TEXTURE BG ═══════════════ */
+.paper-bg{background:linear-gradient(135deg,#1a1f3a 0%,#2a2f4a 50%,#1a1f3a 100%);position:relative}
+.paper-bg::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(245,239,224,.02) 2px,rgba(245,239,224,.02) 4px);pointer-events:none}
+/* ═══════════════ MAIN MENU ═══════════════ */
+#menu-screen{background:radial-gradient(ellipse at center,#2a2f4a 0%,#1a1f3a 60%,#0d1020 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;position:relative;overflow:hidden}
+.menu-portrait{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.12;width:500px;height:600px;pointer-events:none}
+.menu-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(13,16,32,.3) 0%,rgba(13,16,32,.85) 100%);pointer-events:none}
+.menu-bees{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.menu-bee{position:absolute;animation:beeFloat 4s ease-in-infinite;opacity:.3}
+.menu-bee:nth-child(1){top:10%;left:15%;animation-delay:0s}
+.menu-bee:nth-child(2){top:30%;right:20%;animation-delay:1s}
+.menu-bee:nth-child(3){bottom:20%;left:25%;animation-delay:2s}
+.menu-bee:nth-child(4){top:60%;right:10%;animation-delay:.5s}
+.menu-bee:nth-child(5){bottom:40%;left:60%;animation-delay:1.5s}
+.menu-eagle{position:absolute;top:5%;animation:eagleFly 12s linear infinite;opacity:.15;pointer-events:none}
+.menu-content{position:relative;z-index:2;max-width:600px;width:100%}
+.menu-title{font-family:var(--font-head);font-size:clamp(2.5rem,8vw,4.5rem);font-weight:bold;background:linear-gradient(90deg,#d4af37,#f0d060,#d4af37,#b8942e);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShimmer 3s linear infinite;text-shadow:none;letter-spacing:3px;margin-bottom:5px}
+.menu-subtitle{font-family:var(--font-head);font-size:clamp(1.2rem,4vw,1.8rem);color:var(--gold);font-style:italic;opacity:.9;margin-bottom:8px}
+.menu-theme{display:inline-block;background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);border-radius:20px;padding:4px 16px;font-size:.85rem;color:var(--gold);margin-bottom:25px}
+.menu-buttons{display:flex;flex-direction:column;gap:10px;align-items:center;margin-bottom:20px}
+.menu-btn{background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(212,175,55,.05));border:1px solid rgba(212,175,55,.4);color:var(--cream);padding:12px 32px;border-radius:8px;font-size:1rem;width:280px;max-width:90%;transition:all .3s;backdrop-filter:blur(4px);text-align:center}
+.menu-btn:hover{background:linear-gradient(135deg,rgba(212,175,55,.3),rgba(212,175,55,.1));border-color:var(--gold);animation:glow 1.5s infinite;transform:translateY(-2px)}
+.menu-btn.primary{background:linear-gradient(135deg,rgba(212,175,55,.3),rgba(123,30,43,.2));border-color:var(--gold);font-weight:bold;font-size:1.1rem}
+.menu-quote{font-style:italic;color:rgba(245,239,224,.6);font-size:.9rem;max-width:400px;margin-top:10px;line-height:1.5}
+.menu-ornament{width:200px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:15px auto}
+/* ═══════════════ CHARACTER CREATION ═══════════════ */
+#create-screen{padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:40px}
+.create-card{background:rgba(26,31,58,.9);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:30px;max-width:600px;width:100%;animation:slideUp .6s ease}
+.create-card h2{font-family:var(--font-head);color:var(--gold);font-size:1.8rem;text-align:center;margin-bottom:20px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;color:var(--gold);font-size:.95rem;margin-bottom:6px;font-weight:600}
+.form-group input[type="text"]{width:100%;padding:10px 14px;background:rgba(245,239,224,.08);border:1px solid rgba(212,175,55,.3);border-radius:6px;color:var(--cream);font-size:1rem}
+.form-group input:focus{border-color:var(--gold);outline:none;box-shadow:0 0 8px rgba(212,175,55,.3)}
+.role-cards,.origin-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.role-card,.origin-card{background:rgba(245,239,224,.05);border:2px solid rgba(212,175,55,.2);border-radius:8px;padding:14px;cursor:pointer;transition:all .3s;text-align:center}
+.role-card:hover,.origin-card:hover{border-color:rgba(212,175,55,.5);background:rgba(245,239,224,.1)}
+.role-card.selected,.origin-card.selected{border-color:var(--gold);background:rgba(212,175,55,.15);box-shadow:0 0 12px rgba(212,175,55,.3)}
+.role-card h4,.origin-card h4{color:var(--gold);margin-bottom:4px;font-size:.95rem}
+.role-card p,.origin-card p{font-size:.8rem;color:rgba(245,239,224,.7);line-height:1.4}
+.btn-start{display:block;margin:20px auto 0;background:linear-gradient(135deg,var(--gold),#b8942e);color:var(--navy);padding:14px 40px;border-radius:8px;font-size:1.1rem;font-weight:bold;transition:all .3s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(212,175,55,.4)}
+.btn-start:disabled{opacity:.5;cursor:not-allowed;transform:none}
+/* ═══════════════ GAME SCREEN ═══════════════ */
+#game-screen{display:flex;flex-direction:column;height:100%}
+.hud{background:linear-gradient(180deg,rgba(13,16,32,.95),rgba(26,31,58,.9));border-bottom:1px solid rgba(212,175,55,.3);padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;z-index:10;min-height:auto}
+.hud-stat{flex:1;min-width:100px;max-width:180px}
+.hud-stat-label{font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;display:flex;justify-content:space-between}
+.hud-stat-label span:last-child{color:var(--cream)}
+.hud-bar{height:6px;background:rgba(245,239,224,.1);border-radius:3px;overflow:hidden}
+.hud-bar-fill{height:100%;border-radius:3px;transition:width .5s ease}
+.hud-bar-fill.gold{background:linear-gradient(90deg,#d4af37,#f0d060)}
+.hud-bar-fill.burgundy{background:linear-gradient(90deg,#7b1e2b,#a83246)}
+.hud-bar-fill.teal{background:linear-gradient(90deg,#2dd4bf,#5eead4)}
+.hud-bar-fill.red{background:linear-gradient(90deg,#e53e3e,#f56565)}
+.hud-bar-fill.green{background:linear-gradient(90deg,#38a169,#68d391)}
+.hud-bar-fill.navy{background:linear-gradient(90deg,#4a5568,#718096)}
+.hud-info{display:flex;gap:10px;align-items:center;margin-left:auto;font-size:.8rem}
+.hud-act{color:var(--gold);font-weight:bold}
+.hud-btn{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);color:var(--cream);padding:4px 10px;border-radius:4px;font-size:.75rem;transition:all .2s}
+.hud-btn:hover{background:rgba(212,175,55,.3)}
+.game-content{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;align-items:center}
+.scene-card{background:rgba(26,31,58,.85);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:24px;max-width:700px;width:100%;animation:slideUp .5s ease}
+.scene-title{font-family:var(--font-head);color:var(--gold);font-size:1.5rem;margin-bottom:15px;text-align:center}
+.scene-svg{width:100%;max-width:400px;margin:0 auto 15px;display:block;animation:float 4s ease-in-out infinite}
+.scene-text{color:var(--cream);font-size:1rem;line-height:1.7;margin-bottom:20px}
+.scene-text p{margin-bottom:12px;text-indent:1.5em}
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:15px}
+.choice-btn{background:rgba(245,239,224,.06);border:1px solid rgba(212,175,55,.25);color:var(--cream);padding:14px 18px;border-radius:8px;text-align:left;font-size:.95rem;line-height:1.5;transition:all .3s;cursor:pointer}
+.choice-btn:hover{background:rgba(212,175,55,.12);border-color:var(--gold);transform:translateX(4px)}
+.choice-btn.correct-chosen{background:rgba(56,161,105,.2);border-color:var(--green)}
+.choice-btn.wrong-chosen{background:rgba(229,62,62,.15);border-color:var(--red);animation:shake .5s}
+.history-comment{background:rgba(212,175,55,.08);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:15px;font-size:.9rem;color:rgba(245,239,224,.85);animation:fadeIn .5s}
+.history-comment strong{color:var(--gold)}
+/* ═══════════════ MINI-GAMES ═══════════════ */
+.minigame-overlay{position:fixed;inset:0;background:rgba(13,16,32,.95);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s}
+.minigame-card{background:rgba(26,31,58,.95);border:2px solid rgba(212,175,55,.4);border-radius:16px;padding:30px;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;animation:popIn .4s}
+.minigame-card h2{font-family:var(--font-head);color:var(--gold);text-align:center;margin-bottom:15px;font-size:1.4rem}
+.minigame-card p{margin-bottom:12px;line-height:1.6}
+.mg-options{display:flex;flex-direction:column;gap:8px;margin:15px 0}
+.mg-option{background:rgba(245,239,224,.06);border:1px solid rgba(212,175,55,.2);padding:12px 16px;border-radius:8px;cursor:pointer;transition:all .3s;color:var(--cream)}
+.mg-option:hover{background:rgba(212,175,55,.12);border-color:var(--gold)}
+.mg-option.selected{border-color:var(--gold);background:rgba(212,175,55,.2)}
+.mg-option.correct{border-color:var(--green);background:rgba(56,161,105,.2)}
+.mg-option.wrong{border-color:var(--red);background:rgba(229,62,62,.15)}
+.mg-btn{background:linear-gradient(135deg,var(--gold),#b8942e);color:var(--navy);padding:10px 24px;border-radius:6px;font-weight:bold;font-size:1rem;margin-top:10px;display:inline-block}
+.mg-btn:hover{box-shadow:0 2px 10px rgba(212,175,55,.4)}
+/* Drag & Drop for Vienna */
+.dnd-container{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}
+.dnd-item{background:rgba(212,175,55,.15);border:1px solid var(--gold);padding:8px 14px;border-radius:6px;cursor:grab;font-size:.9rem;user-select:none;touch-action:none}
+.dnd-item:active{cursor:grabbing}
+.dnd-zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:15px 0}
+.dnd-zone{background:rgba(245,239,224,.05);border:2px dashed rgba(212,175,55,.3);border-radius:8px;padding:10px;min-height:60px;text-align:center;transition:all .3s}
+.dnd-zone.drag-over{border-color:var(--gold);background:rgba(212,175,55,.1)}
+.dnd-zone-label{font-size:.8rem;color:var(--gold);margin-bottom:5px;font-weight:bold}
+.dnd-zone .dnd-item{font-size:.8rem;padding:5px 10px;margin:3px}
+/* Timeline */
+.timeline-slots{display:flex;flex-direction:column;gap:6px;margin:15px 0}
+.timeline-slot{background:rgba(245,239,224,.05);border:1px solid rgba(212,175,55,.2);padding:10px 14px;border-radius:6px;display:flex;align-items:center;gap:10px;cursor:grab;user-select:none;touch-action:none;transition:all .2s}
+.timeline-slot:active{cursor:grabbing}
+.timeline-slot .slot-num{background:var(--gold);color:var(--navy);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:bold;flex-shrink:0}
+.timeline-slot.correct-pos{border-color:var(--green);background:rgba(56,161,105,.1)}
+.timeline-slot.wrong-pos{border-color:var(--red);background:rgba(229,62,62,.1)}
+/* ═══════════════ ENDING SCREEN ═══════════════ */
+#ending-screen{padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:30px}
+.ending-card{background:rgba(26,31,58,.9);border:2px solid rgba(212,175,55,.4);border-radius:16px;padding:30px;max-width:650px;width:100%;text-align:center;animation:popIn .6s}
+.ending-card h2{font-family:var(--font-head);color:var(--gold);font-size:2rem;margin-bottom:10px}
+.ending-type{color:var(--teal);font-size:1.1rem;font-style:italic;margin-bottom:20px}
+.ending-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0;text-align:left}
+.ending-stat{background:rgba(245,239,224,.05);padding:8px 12px;border-radius:6px}
+.ending-stat-label{font-size:.75rem;color:var(--gold)}
+.ending-stat-value{font-size:1rem;color:var(--cream);font-weight:bold}
+.ending-grade{font-size:2.5rem;color:var(--gold);font-family:var(--font-head);margin:15px 0}
+.ending-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.ending-btn{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.4);color:var(--cream);padding:10px 20px;border-radius:8px;font-size:.95rem;transition:all .3s}
+.ending-btn:hover{background:rgba(212,175,55,.3);border-color:var(--gold)}
+.ending-btn.primary{background:linear-gradient(135deg,var(--gold),#b8942e);color:var(--navy);font-weight:bold}
+/* ═══════════════ TEACHER MODE ═══════════════ */
+#teacher-screen{padding:20px;overflow-y:auto}
+.teacher-login{max-width:400px;margin:80px auto;text-align:center}
+.teacher-login h2{font-family:var(--font-head);color:var(--gold);margin-bottom:20px}
+.teacher-login input{width:100%;padding:12px;background:rgba(245,239,224,.08);border:1px solid rgba(212,175,55,.3);border-radius:6px;color:var(--cream);margin-bottom:15px;text-align:center;font-size:1.1rem}
+.teacher-panel{max-width:900px;margin:0 auto}
+.teacher-tabs{display:flex;gap:5px;margin-bottom:20px}
+.teacher-tab{background:rgba(245,239,224,.06);border:1px solid rgba(212,175,55,.2);color:var(--cream);padding:10px 20px;border-radius:8px 8px 0 0;transition:all .2s;font-size:.9rem}
+.teacher-tab.active{background:rgba(212,175,55,.15);border-color:var(--gold);color:var(--gold)}
+.teacher-content{background:rgba(26,31,58,.8);border:1px solid rgba(212,175,55,.2);border-radius:0 12px 12px 12px;padding:20px}
+.teacher-content h3{color:var(--gold);font-family:var(--font-head);margin-bottom:15px}
+.scale-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.scale-table th{background:rgba(212,175,55,.15);color:var(--gold);padding:8px;text-align:left;border:1px solid rgba(212,175,55,.2)}
+.scale-table td{padding:8px;border:1px solid rgba(245,239,224,.1);vertical-align:top}
+.scale-table tr:nth-child(even){background:rgba(245,239,224,.03)}
+.student-card{background:rgba(245,239,224,.05);border:1px solid rgba(212,175,55,.2);border-radius:8px;padding:15px;margin-bottom:12px}
+.student-card h4{color:var(--gold);margin-bottom:8px}
+.student-choices{font-size:.85rem;margin:8px 0}
+.student-choice{padding:4px 8px;margin:3px 0;border-radius:4px}
+.student-choice.correct{background:rgba(56,161,105,.15);border-left:3px solid var(--green)}
+.student-choice.wrong{background:rgba(229,62,62,.1);border-left:3px solid var(--red)}
+.teacher-grade-input{display:flex;gap:8px;align-items:center;margin-top:10px}
+.teacher-grade-input select,.teacher-grade-input input{padding:6px 10px;background:rgba(245,239,224,.08);border:1px solid rgba(212,175,55,.3);border-radius:4px;color:var(--cream)}
+.teacher-actions{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.teacher-actions button{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);color:var(--cream);padding:8px 16px;border-radius:6px;font-size:.85rem;transition:all .2s}
+.teacher-actions button:hover{background:rgba(212,175,55,.3)}
+/* ═══════════════ RULES/ABOUT ═══════════════ */
+#rules-screen,#about-screen{padding:30px;display:flex;flex-direction:column;align-items:center}
+.info-card{background:rgba(26,31,58,.9);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:30px;max-width:650px;width:100%;animation:slideUp .5s}
+.info-card h2{font-family:var(--font-head);color:var(--gold);text-align:center;margin-bottom:20px}
+.info-card p,.info-card li{margin-bottom:10px;line-height:1.7}
+.info-card ul{padding-left:20px}
+.back-btn{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);color:var(--cream);padding:10px 24px;border-radius:8px;margin-top:20px;transition:all .3s}
+.back-btn:hover{background:rgba(212,175,55,.3)}
+/* ═══════════════ SETTINGS ═══════════════ */
+.settings-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(245,239,224,.1)}
+.settings-row label{color:var(--cream);font-size:.95rem}
+.toggle{width:44px;height:24px;background:rgba(245,239,224,.15);border-radius:12px;position:relative;cursor:pointer;transition:all .3s}
+.toggle.on{background:rgba(212,175,55,.5)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:var(--cream);border-radius:50%;transition:all .3s}
+.toggle.on::after{left:22px;background:var(--gold)}
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:600px){
+.hud{padding:6px 8px;gap:4px}
+.hud-stat{min-width:80px}
+.scene-card{padding:16px}
+.menu-title{letter-spacing:1px}
+.ending-stats{grid-template-columns:1fr}
+.role-cards,.origin-cards{grid-template-columns:1fr}
+}
+/* ═══════════════ REDUCED MOTION ═══════════════ */
+@media(prefers-reduced-motion:reduce){
+*{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+.reduced-motion *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+/* ═══════════════ SCROLLBAR ═══════════════ */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:rgba(26,31,58,.5)}
+::-webkit-scrollbar-thumb{background:rgba(212,175,55,.3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(212,175,55,.5)}
+/* ═══════════════ PROPAGANDA MINI-GAME ═══════════════ */
+.propaganda-canvas{width:280px;height:350px;margin:15px auto;border:3px solid var(--gold);border-radius:8px;background:rgba(245,239,224,.05);position:relative;overflow:hidden}
+.propaganda-element{position:absolute;transition:all .3s;cursor:pointer}
+.propaganda-element.selected{filter:drop-shadow(0 0 8px var(--gold))}
+.propaganda-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.propaganda-opt{background:rgba(245,239,224,.06);border:1px solid rgba(212,175,55,.2);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .2s;color:var(--cream)}
+.propaganda-opt:hover{border-color:var(--gold)}
+.propaganda-opt.active{background:rgba(212,175,55,.2);border-color:var(--gold);color:var(--gold)}
+/* Economy mini-game */
+.economy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.economy-item{background:rgba(245,239,224,.05);border:1px solid rgba(212,175,55,.2);border-radius:8px;padding:12px;text-align:center}
+.economy-item h4{color:var(--gold);font-size:.9rem;margin-bottom:5px}
+.economy-item .value{font-size:1.3rem;font-weight:bold;color:var(--cream)}
+.economy-slider{width:100%;margin:5px 0;accent-color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- ═══════════════ MENU SCREEN ═══════════════ -->
+<div id="menu-screen" class="screen active">
+<div class="menu-portrait">
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+<!-- Napoleon silhouette portrait -->
+<defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#b8942e"/></linearGradient></defs>
+<rect width="500" height="600" fill="none"/>
+<!-- Hat -->
+<path d="M150 180 Q250 120 350 180 Q360 160 340 150 Q250 100 160 150 Q140 160 150 180Z" fill="url(#goldGrad)" opacity=".6"/>
+<!-- Face -->
+<ellipse cx="250" cy="260" rx="65" ry="80" fill="url(#goldGrad)" opacity=".4"/>
+<!-- Collar/uniform -->
+<path d="M180 340 Q250 320 320 340 L340 500 Q250 520 160 500Z" fill="url(#goldGrad)" opacity=".5"/>
+<!-- Hand in coat -->
+<path d="M220 380 Q240 400 260 380 Q250 420 230 420Z" fill="url(#goldGrad)" opacity=".3"/>
+<!-- Epaulettes -->
+<ellipse cx="185" cy="345" rx="20" ry="10" fill="url(#goldGrad)" opacity=".5"/>
+<ellipse cx="315" cy="345" rx="20" ry="10" fill="url(#goldGrad)" opacity=".5"/>
+<!-- Medal -->
+<circle cx="230" cy="400" r="8" fill="url(#goldGrad)" opacity=".6"/>
+<!-- Banner behind -->
+<path d="M380 100 L420 100 L420 500 L380 480Z" fill="url(#goldGrad)" opacity=".2"/>
+<path d="M80 120 L120 100 L120 480 L80 500Z" fill="url(#goldGrad)" opacity=".2"/>
+</svg>
+</div>
+<div class="menu-overlay"></div>
+<div class="menu-bees">
+<svg class="menu-bee" width="30" height="30" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="10" fill="#d4af37" opacity=".6"/><path d="M10 10 Q5 5 8 8" stroke="#d4af37" fill="none" stroke-width="1"/><path d="M20 10 Q25 5 22 8" stroke="#d4af37" fill="none" stroke-width="1"/><line x1="15" y1="8" x2="15" y2="22" stroke="#1a1f3a" stroke-width="1.5"/><line x1="15" y1="12" x2="15" y2="12" stroke="#1a1f3a" stroke-width="8" stroke-dasharray="2 3"/></svg>
+<svg class="menu-bee" width="25" height="25" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="10" fill="#d4af37" opacity=".6"/><line x1="15" y1="8" x2="15" y2="22" stroke="#1a1f3a" stroke-width="1.5"/></svg>
+<svg class="menu-bee" width="20" height="20" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="10" fill="#d4af37" opacity=".6"/></svg>
+<svg class="menu-bee" width="28" height="28" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="10" fill="#d4af37" opacity=".6"/></svg>
+<svg class="menu-bee" width="22" height="22" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="10" fill="#d4af37" opacity=".6"/></svg>
+</div>
+<svg class="menu-eagle" width="60" height="40" viewBox="0 0 60 40"><path d="M30 5 L45 15 L55 10 L50 20 L58 25 L45 25 L40 35 L30 28 L20 35 L15 25 L2 25 L10 20 L5 10 L15 15Z" fill="#d4af37"/></svg>
+<div class="menu-content">
+<div class="menu-title">НАПОЛЕОН</div>
+<div class="menu-subtitle">Путь Империи</div>
+<div class="menu-ornament"></div>
+<div class="menu-theme">§21–22 • История • 8 класс</div>
+<div class="menu-buttons">
+<button class="menu-btn primary" onclick="startNewGame()">⚔️ Новая игра</button>
+<button class="menu-btn" onclick="startQuickGame()">⚡ Быстрая игра (10 мин)</button>
+<button class="menu-btn" onclick="startExploreMode()">🔍 Режим исследования</button>
+<button class="menu-btn" id="continue-btn" onclick="continueGame()" style="display:none">📜 Продолжить</button>
+<button class="menu-btn" onclick="showScreen('teacher-screen')">👨‍🏫 Режим учителя</button>
+<button class="menu-btn" onclick="showScreen('rules-screen')">📖 Правила</button>
+<button class="menu-btn" onclick="showScreen('about-screen')">ℹ️ Об игре</button>
+<button class="menu-btn" onclick="downloadGame()">⬇️ Скачать игру</button>
+</div>
+<div class="menu-ornament"></div>
+<div class="menu-quote">«История — это набор истин, ставших событиями»<br><small>— Наполеон Бонапарт</small></div>
+</div>
+</div>
+
+<!-- ═══════════════ CREATE CHARACTER ═══════════════ -->
+<div id="create-screen" class="screen paper-bg">
+<div class="create-card">
+<h2>⚜️ Создание персонажа</h2>
+<div class="form-group">
+<label>Ваше имя:</label>
+<input type="text" id="char-name" placeholder="Введите имя..." maxlength="30">
+</div>
+<div class="form-group">
+<label>Ваша роль:</label>
+<div class="role-cards">
+<div class="role-card" data-role="officer" onclick="selectRole(this)">
+<h4>⚔️ Офицер</h4>
+<p>Молодой офицер армии Наполеона. Бонус: военная слава. Участие в битвах.</p>
+</div>
+<div class="role-card" data-role="official" onclick="selectRole(this)">
+<h4>📋 Чиновник</h4>
+<p>Чиновник в правительстве Империи. Бонус: политическое влияние. Реформы изнутри.</p>
+</div>
+<div class="role-card" data-role="diplomat" onclick="selectRole(this)">
+<h4>🕊️ Дипломат</h4>
+<p>Дипломат при дворе Наполеона. Бонус: дипломатический вес. Переговоры и союзы.</p>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>Происхождение:</label>
+<div class="origin-cards">
+<div class="origin-card" data-origin="noble" onclick="selectOrigin(this)">
+<h4>🏰 Дворянство</h4>
+<p>Стартовый бонус репутации при дворе. Легитимность происхождения.</p>
+</div>
+<div class="origin-card" data-origin="bourgeois" onclick="selectOrigin(this)">
+<h4>💰 Буржуазия</h4>
+<p>Стартовый бонус богатства. Связи в торговой среде.</p>
+</div>
+<div class="origin-card" data-origin="common" onclick="selectOrigin(this)">
+<h4>🌾 Простолюдин</h4>
+<p>Стартовый бонус народной поддержки. Карьера благодаря заслугам.</p>
+</div>
+</div>
+</div>
+<button class="btn-start" id="btn-begin" onclick="beginGame()" disabled>Начать путь →</button>
+</div>
+</div>
+
+<!-- ═══════════════ GAME SCREEN ═══════════════ -->
+<div id="game-screen" class="screen">
+<div class="hud" id="hud">
+<div class="hud-stat"><div class="hud-stat-label"><span id="main-res-label">Слава</span><span id="main-res-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill gold" id="main-res-bar" style="width:50%"></div></div></div>
+<div class="hud-stat"><div class="hud-stat-label"><span>Богатство</span><span id="wealth-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill burgundy" id="wealth-bar" style="width:50%"></div></div></div>
+<div class="hud-stat"><div class="hud-stat-label"><span>Репутация</span><span id="rep-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill teal" id="rep-bar" style="width:50%"></div></div></div>
+<div class="hud-stat"><div class="hud-stat-label"><span>Народ</span><span id="people-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill green" id="people-bar" style="width:50%"></div></div></div>
+<div class="hud-stat"><div class="hud-stat-label"><span>Лояльность</span><span id="loyalty-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill navy" id="loyalty-bar" style="width:50%"></div></div></div>
+<div class="hud-stat"><div class="hud-stat-label"><span>Честь</span><span id="honor-val">50</span></div><div class="hud-bar"><div class="hud-bar-fill red" id="honor-bar" style="width:50%"></div></div></div>
+<div class="hud-info">
+<span class="hud-act" id="hud-act">Акт I</span>
+<button class="hud-btn" onclick="toggleJournal()">📜</button>
+<button class="hud-btn" onclick="showSettings()">⚙️</button>
+</div>
+</div>
+<div class="game-content" id="game-content">
+<!-- Scene content injected here -->
+</div>
+</div>
+
+<!-- ═══════════════ ENDING SCREEN ═══════════════ -->
+<div id="ending-screen" class="screen paper-bg">
+<div class="ending-card" id="ending-card">
+<!-- Filled by JS -->
+</div>
+</div>
+
+<!-- ═══════════════ TEACHER SCREEN ═══════════════ -->
+<div id="teacher-screen" class="screen paper-bg">
+<div class="teacher-login" id="teacher-login">
+<h2>👨‍🏫 Режим учителя</h2>
+<p style="margin-bottom:15px;color:rgba(245,239,224,.7)">Введите пароль для доступа</p>
+<input type="password" id="teacher-pass" placeholder="Пароль..." onkeydown="if(event.key==='Enter')teacherLogin()">
+<br>
+<button class="menu-btn" onclick="teacherLogin()">Войти</button>
+<br><br>
+<button class="back-btn" onclick="showScreen('menu-screen')">← Назад в меню</button>
+</div>
+<div class="teacher-panel" id="teacher-panel" style="display:none">
+<div class="teacher-tabs">
+<button class="teacher-tab active" onclick="showTeacherTab('scale')">📊 Шкала ответов</button>
+<button class="teacher-tab" onclick="showTeacherTab('students')">👥 Ученики</button>
+</div>
+<div class="teacher-content" id="teacher-content">
+<!-- Filled by JS -->
+</div>
+<div style="margin-top:15px;text-align:center">
+<button class="back-btn" onclick="showScreen('menu-screen')">← В меню</button>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ RULES SCREEN ═══════════════ -->
+<div id="rules-screen" class="screen paper-bg">
+<div class="info-card">
+<h2>📖 Правила игры</h2>
+<p><strong style="color:var(--gold)">«Наполеон: Путь Империи»</strong> — сюжетная историческая игра по материалам §21–22 учебника для 8 класса.</p>
+<ul>
+<li><strong>Создайте персонажа</strong> — выберите имя, роль и происхождение. Каждая роль открывает уникальные возможности.</li>
+<li><strong>Проживайте события</strong> — 5 актов, от переворота 1799 года до Венского конгресса 1815 года.</li>
+<li><strong>Делайте выборы</strong> — в каждой сцене 2–4 варианта. Есть исторически верные решения — они дают бонусы.</li>
+<li><strong>Следите за ресурсами</strong> — 6 характеристик определяют вашу концовку.</li>
+<li><strong>Проходите мини-игры</strong> — 5 интерактивных заданий закрепляют материал.</li>
+<li><strong>Получите оценку</strong> — система автоматически оценит ваши знания по 5-балльной шкале.</li>
+</ul>
+<p><strong style="color:var(--teal)">Режимы:</strong></p>
+<ul>
+<li><strong>Новая игра</strong> — полное прохождение (20–30 мин)</li>
+<li><strong>Быстрая игра</strong> — ключевые сцены (~10 мин)</li>
+<li><strong>Исследование</strong> — без ограничений, с подсказками</li>
+</ul>
+<button class="back-btn" onclick="showScreen('menu-screen')">← Назад</button>
+</div>
+</div>
+
+<!-- ═══════════════ ABOUT SCREEN ═══════════════ -->
+<div id="about-screen" class="screen paper-bg">
+<div class="info-card">
+<h2>ℹ️ Об игре</h2>
+<p><strong style="color:var(--gold)">«Наполеон: Путь Империи»</strong></p>
+<p>Обучающая браузерная игра по истории для 8 класса.</p>
+<p><strong>Тема:</strong> Империя Наполеона Бонапарта: от триумфа до краха (§21–22)</p>
+<p><strong>Жанр:</strong> Сюжетная историческая стратегия + интерактивная новелла</p>
+<p><strong>Технологии:</strong> HTML + CSS + JavaScript, без внешних зависимостей.</p>
+<p><strong>Автор:</strong> Создано как учебное пособие.</p>
+<p style="color:var(--gold);font-style:italic;margin-top:15px">«Я и есть Французская революция» — Наполеон</p>
+<button class="back-btn" onclick="showScreen('menu-screen')">← Назад</button>
+</div>
+</div>
+
+<!-- ═══════════════ JOURNAL MODAL ═══════════════ -->
+<div id="journal-modal" style="display:none;position:fixed;inset:0;background:rgba(13,16,32,.9);z-index:50;padding:20px;overflow-y:auto" onclick="if(event.target===this)toggleJournal()">
+<div style="max-width:500px;margin:40px auto;background:rgba(26,31,58,.95);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:24px">
+<h3 style="color:var(--gold);font-family:var(--font-head);margin-bottom:15px">📜 Журнал решений</h3>
+<div id="journal-content" style="font-size:.9rem;line-height:1.6"></div>
+<button class="back-btn" onclick="toggleJournal()" style="margin-top:15px">Закрыть</button>
+</div>
+</div>
+
+<!-- ═══════════════ SETTINGS MODAL ═══════════════ -->
+<div id="settings-modal" style="display:none;position:fixed;inset:0;background:rgba(13,16,32,.9);z-index:50;padding:20px;overflow-y:auto" onclick="if(event.target===this)showSettings()">
+<div style="max-width:400px;margin:40px auto;background:rgba(26,31,58,.95);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:24px">
+<h3 style="color:var(--gold);font-family:var(--font-head);margin-bottom:15px">⚙️ Настройки</h3>
+<div class="settings-row"><label>Звуки</label><div class="toggle on" id="toggle-sound" onclick="toggleSetting('sound')"></div></div>
+<div class="settings-row"><label>Уменьшенная анимация</label><div class="toggle" id="toggle-motion" onclick="toggleSetting('motion')"></div></div>
+<div class="settings-row"><label>Скорость текста</label><select id="text-speed" style="padding:4px 8px;background:rgba(245,239,224,.08);border:1px solid rgba(212,175,55,.3);border-radius:4px;color:var(--cream)"><option value="normal">Обычная</option><option value="fast">Быстрая</option><option value="slow">Медленная</option></select></div>
+<button class="back-btn" onclick="showSettings()" style="margin-top:15px">Закрыть</button>
+</div>
+</div>
+
+<!-- ═══════════════ MINIGAME CONTAINER ═══════════════ -->
+<div id="minigame-container"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   GAME ENGINE — Napoleon: Path of the Empire
+   ═══════════════════════════════════════════════════════════ */
+
+// ═══════════ STATE ═══════════
+let state = {
+  name:'',role:'',origin:'',
+  mainRes:50,wealth:50,rep:50,people:50,loyalty:50,honor:50,
+  act:1,sceneIdx:0,
+  flags:{},journal:[],achievements:[],
+  choices:[],minigameResults:{},
+  startTime:0,quickMode:false,exploreMode:false,
+  settings:{sound:true,reducedMotion:false,textSpeed:'normal'}
+};
+
+// ═══════════ AUDIO (Web Audio API) ═══════════
+let audioCtx;
+function playSound(type){
+  if(!state.settings.sound)return;
+  try{
+    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.connect(g);g.connect(audioCtx.destination);
+    if(type==='click'){o.frequency.value=800;g.gain.value=.1;o.start();o.stop(audioCtx.currentTime+.05)}
+    else if(type==='correct'){o.frequency.value=523;g.gain.value=.15;o.start();setTimeout(()=>{o.frequency.value=659},100);o.stop(audioCtx.currentTime+.2)}
+    else if(type==='wrong'){o.frequency.value=200;o.type='sawtooth';g.gain.value=.1;o.start();o.stop(audioCtx.currentTime+.2)}
+    else if(type==='victory'){o.frequency.value=440;g.gain.value=.12;o.start();setTimeout(()=>{o.frequency.value=554},150);setTimeout(()=>{o.frequency.value=659},300);o.stop(audioCtx.currentTime+.5)}
+    else if(type==='alarm'){o.frequency.value=300;o.type='square';g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+.3)}
+  }catch(e){}
+}
+
+// ═══════════ SVG ILLUSTRATIONS ═══════════
+const svgs = {
+  brumaire:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <rect x="50" y="80" width="300" height="150" fill="#2a2f4a" rx="5"/>
+    <rect x="80" y="100" width="60" height="100" fill="#3a3f5a" rx="3"/>
+    <rect x="170" y="90" width="60" height="110" fill="#3a3f5a" rx="3"/>
+    <rect x="260" y="100" width="60" height="100" fill="#3a3f5a" rx="3"/>
+    <circle cx="200" cy="60" r="25" fill="#d4af37" opacity=".6"/>
+    <path d="M175 55 Q200 30 225 55" fill="none" stroke="#d4af37" stroke-width="3"/>
+    <rect x="185" y="40" width="30" height="5" fill="#d4af37"/>
+    <line x1="100" y1="200" x2="300" y2="200" stroke="#7b1e2b" stroke-width="4"/>
+    <circle cx="120" cy="195" r="5" fill="#d4af37"/><circle cx="200" cy="195" r="5" fill="#d4af37"/><circle cx="280" cy="195" r="5" fill="#d4af37"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="12" font-family="Georgia">18 брюмера</text>
+  </svg>`,
+  code:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <rect x="130" y="40" width="140" height="180" fill="#8B4513" rx="5" opacity=".8"/>
+    <rect x="140" y="50" width="120" height="160" fill="#f5efe0" rx="3"/>
+    <line x1="155" y1="70" x2="245" y2="70" stroke="#1a1f3a" stroke-width="1.5"/>
+    <line x1="155" y1="85" x2="245" y2="85" stroke="#1a1f3a" stroke-width="1"/>
+    <line x1="155" y1="100" x2="230" y2="100" stroke="#1a1f3a" stroke-width="1"/>
+    <line x1="155" y1="115" x2="240" y2="115" stroke="#1a1f3a" stroke-width="1"/>
+    <line x1="155" y1="130" x2="220" y2="130" stroke="#1a1f3a" stroke-width="1"/>
+    <line x1="155" y1="145" x2="245" y2="145" stroke="#1a1f3a" stroke-width="1"/>
+    <line x1="155" y1="160" x2="235" y2="160" stroke="#1a1f3a" stroke-width="1"/>
+    <path d="M180 175 L200 165 L220 175 L210 185 L190 185Z" fill="#d4af37"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Гражданский кодекс 1804</text>
+  </svg>`,
+  coronation:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <rect x="100" y="50" width="200" height="180" fill="#2a2f4a" rx="5"/>
+    <path d="M170 100 L200 70 L230 100" fill="#d4af37"/>
+    <circle cx="200" cy="75" r="8" fill="#d4af37"/>
+    <rect x="185" y="100" width="30" height="60" fill="#7b1e2b"/>
+    <ellipse cx="200" cy="130" rx="25" ry="35" fill="#f5efe0" opacity=".3"/>
+    <path d="M160 170 Q200 160 240 170 L250 220 Q200 230 150 220Z" fill="#7b1e2b" opacity=".7"/>
+    <circle cx="160" cy="90" r="15" fill="#f5efe0" opacity=".3"/>
+    <circle cx="240" cy="90" r="15" fill="#f5efe0" opacity=".3"/>
+    <path d="M150 80 Q160 60 170 80" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <text x="200" y="245" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Коронация 1804</text>
+  </svg>`,
+  battle:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M0 180 Q100 160 200 170 Q300 180 400 165 L400 250 L0 250Z" fill="#2a3f2a"/>
+    <line x1="50" y1="150" x2="80" y2="130" stroke="#d4af37" stroke-width="2"/>
+    <line x1="100" y1="140" x2="130" y2="120" stroke="#d4af37" stroke-width="2"/>
+    <line x1="150" y1="145" x2="180" y2="125" stroke="#d4af37" stroke-width="2"/>
+    <line x1="250" y1="140" x2="280" y2="155" stroke="#e53e3e" stroke-width="2"/>
+    <line x1="300" y1="135" x2="330" y2="150" stroke="#e53e3e" stroke-width="2"/>
+    <line x1="340" y1="145" x2="360" y2="155" stroke="#e53e3e" stroke-width="2"/>
+    <circle cx="200" cy="100" r="20" fill="#d4af37" opacity=".4"/>
+    <path d="M190 95 L200 80 L210 95" fill="#d4af37"/>
+    <path d="M60 160 L70 140 L75 160" fill="#7b1e2b" opacity=".6"/>
+    <path d="M330 155 L340 135 L345 155" fill="#4a5568" opacity=".6"/>
+    <circle cx="120" cy="100" r="5" fill="#d4af37" opacity=".5"/>
+    <circle cx="280" cy="95" r="5" fill="#e53e3e" opacity=".5"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Бородино. 1812</text>
+  </svg>`,
+  moscow:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a0a0a"/>
+    <rect x="80" y="120" width="60" height="80" fill="#3a2020"/>
+    <rect x="170" y="100" width="70" height="100" fill="#3a2020"/>
+    <rect x="270" y="130" width="50" height="70" fill="#3a2020"/>
+    <path d="M80 120 L110 90 L140 120" fill="#4a2020"/>
+    <path d="M170 100 L205 65 L240 100" fill="#4a2020"/>
+    <path d="M270 130 L295 105 L320 130" fill="#4a2020"/>
+    <ellipse cx="110" cy="100" rx="20" ry="30" fill="#ff6600" opacity=".6" style="animation:flicker 1s infinite"/>
+    <ellipse cx="205" cy="75" rx="25" ry="35" fill="#ff4400" opacity=".5" style="animation:flicker 1.5s infinite"/>
+    <ellipse cx="295" cy="110" rx="18" ry="25" fill="#ff6600" opacity=".6" style="animation:flicker 1.2s infinite"/>
+    <ellipse cx="150" cy="90" rx="15" ry="20" fill="#ffaa00" opacity=".4" style="animation:flicker .8s infinite"/>
+    <ellipse cx="250" cy="85" rx="12" ry="18" fill="#ff8800" opacity=".4" style="animation:flicker 1.3s infinite"/>
+    <text x="200" y="240" text-anchor="middle" fill="#ff6600" font-size="11" font-family="Georgia">Пожар Москвы. 1812</text>
+  </svg>`,
+  retreat:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M0 200 Q100 180 200 190 Q300 200 400 185 L400 250 L0 250Z" fill="#e8e8f0" opacity=".3"/>
+    <path d="M0 160 Q50 150 100 155 Q200 165 300 150 Q350 145 400 155 L400 180 Q300 170 200 175 Q100 180 0 170Z" fill="#4a6080" opacity=".4"/>
+    <circle cx="80" cy="170" r="4" fill="#d4af37" opacity=".6"/>
+    <circle cx="120" cy="165" r="3" fill="#d4af37" opacity=".5"/>
+    <circle cx="160" cy="172" r="4" fill="#d4af37" opacity=".4"/>
+    <circle cx="200" cy="168" r="3" fill="#d4af37" opacity=".3"/>
+    <circle cx="240" cy="175" r="3" fill="#d4af37" opacity=".3"/>
+    <circle cx="280" cy="160" r="4" fill="#d4af37" opacity=".2"/>
+    <path d="M60 175 L70 165 L75 175" fill="#7b1e2b" opacity=".4"/>
+    <path d="M140 170 L150 160 L155 170" fill="#7b1e2b" opacity=".3"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Отступление. Березина. 1812</text>
+  </svg>`,
+  vienna:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <ellipse cx="200" cy="160" rx="120" ry="40" fill="#5a3a1a" opacity=".6"/>
+    <rect x="100" y="80" width="30" height="80" fill="#3a3f5a"/>
+    <circle cx="115" cy="75" r="12" fill="#f5efe0" opacity=".4"/>
+    <rect x="170" y="85" width="30" height="75" fill="#3a3f5a"/>
+    <circle cx="185" cy="80" r="12" fill="#f5efe0" opacity=".4"/>
+    <rect x="240" y="80" width="30" height="80" fill="#3a3f5a"/>
+    <circle cx="255" cy="75" r="12" fill="#f5efe0" opacity=".4"/>
+    <rect x="300" y="90" width="25" height="70" fill="#3a3f5a"/>
+    <circle cx="312" cy="85" r="10" fill="#f5efe0" opacity=".4"/>
+    <rect x="130" y="130" width="140" height="5" fill="#d4af37" opacity=".5"/>
+    <circle cx="200" cy="50" r="15" fill="#d4af37" opacity=".5"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Венский конгресс. 1814-1815</text>
+  </svg>`,
+  waterloo:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M0 180 Q100 170 200 175 Q300 180 400 170 L400 250 L0 250Z" fill="#2a3f2a"/>
+    <path d="M150 120 L200 80 L250 120" fill="#7b1e2b" opacity=".7"/>
+    <rect x="190" y="120" width="20" height="50" fill="#7b1e2b" opacity=".5"/>
+    <line x1="100" y1="150" x2="150" y2="140" stroke="#d4af37" stroke-width="2"/>
+    <line x1="250" y1="140" x2="300" y2="150" stroke="#4a5568" stroke-width="2"/>
+    <line x1="120" y1="160" x2="160" y2="155" stroke="#d4af37" stroke-width="1.5"/>
+    <line x1="240" y1="155" x2="280" y2="160" stroke="#4a5568" stroke-width="1.5"/>
+    <circle cx="200" cy="100" r="8" fill="#d4af37" opacity=".5"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Ватерлоо. 18 июня 1815</text>
+  </svg>`,
+  elba:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a2f4a"/>
+    <path d="M0 180 Q100 150 200 160 Q300 170 400 155 L400 250 L0 250Z" fill="#2a4f6a"/>
+    <path d="M150 100 Q200 60 250 100 L250 160 Q200 170 150 160Z" fill="#5a4a3a" opacity=".7"/>
+    <rect x="180" y="110" width="40" height="50" fill="#3a3a3a" opacity=".5"/>
+    <rect x="190" y="120" width="10" height="15" fill="#d4af37" opacity=".3"/>
+    <path d="M100 170 L130 160 L140 170" fill="#d4af37" opacity=".4"/>
+    <path d="M280 165 L310 155 L320 165" fill="#d4af37" opacity=".4"/>
+    <circle cx="200" cy="80" r="20" fill="#d4af37" opacity=".3"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Остров Эльба. 1814</text>
+  </svg>`,
+  blockade:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M0 160 Q100 150 200 155 Q300 160 400 150 L400 250 L0 250Z" fill="#2a3f5a"/>
+    <path d="M80 130 L120 110 L140 130 L120 135Z" fill="#5a4a3a"/>
+    <line x1="110" y1="110" x2="110" y2="85" stroke="#5a4a3a" stroke-width="2"/>
+    <path d="M200 120 L250 100 L270 120 L250 125Z" fill="#5a4a3a"/>
+    <line x1="235" y1="100" x2="235" y2="75" stroke="#5a4a3a" stroke-width="2"/>
+    <line x1="60" y1="145" x2="340" y2="145" stroke="#d4af37" stroke-width="2" stroke-dasharray="8 4"/>
+    <line x1="60" y1="150" x2="340" y2="150" stroke="#7b1e2b" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Континентальная блокада</text>
+  </svg>`,
+  guerrilla:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M0 200 Q50 180 100 190 Q200 200 300 185 Q350 180 400 195 L400 250 L0 250Z" fill="#3a5a2a"/>
+    <path d="M50 160 L70 140 L80 160" fill="#7b1e2b" opacity=".6"/>
+    <path d="M150 150 L170 130 L180 150" fill="#7b1e2b" opacity=".6"/>
+    <path d="M280 155 L300 135 L310 155" fill="#7b1e2b" opacity=".6"/>
+    <path d="M100 170 L110 160 L115 170" fill="#d4af37" opacity=".4"/>
+    <path d="M220 165 L230 155 L235 165" fill="#d4af37" opacity=".4"/>
+    <path d="M340 170 L350 160 L355 170" fill="#d4af37" opacity=".4"/>
+    <path d="M60 130 Q80 120 100 130" fill="none" stroke="#3a5a2a" stroke-width="3"/>
+    <path d="M250 125 Q270 115 290 125" fill="none" stroke="#3a5a2a" stroke-width="3"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Испанская герилья. 1808</text>
+  </svg>`,
+  propaganda:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <rect x="100" y="30" width="200" height="190" fill="#f5efe0" opacity=".1" rx="5"/>
+    <circle cx="200" cy="90" r="30" fill="#d4af37" opacity=".4"/>
+    <path d="M185 75 L200 55 L215 75" fill="#d4af37" opacity=".6"/>
+    <path d="M170 130 Q200 120 230 130 L240 200 Q200 210 160 200Z" fill="#7b1e2b" opacity=".5"/>
+    <ellipse cx="160" cy="135" rx="12" ry="6" fill="#d4af37" opacity=".4"/>
+    <ellipse cx="240" cy="135" rx="12" ry="6" fill="#d4af37" opacity=".4"/>
+    <circle cx="200" cy="160" r="6" fill="#d4af37" opacity=".5"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Наполеоновская пропаганда</text>
+  </svg>`,
+  alexander:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <rect x="120" y="40" width="160" height="190" fill="#2a2f4a" rx="8"/>
+    <ellipse cx="200" cy="100" rx="35" ry="40" fill="#f5efe0" opacity=".3"/>
+    <path d="M165 140 Q200 130 235 140 L245 220 Q200 230 155 220Z" fill="#4a5568" opacity=".6"/>
+    <path d="M175 80 Q200 65 225 80" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="200" cy="70" r="5" fill="#d4af37" opacity=".5"/>
+    <rect x="180" y="150" width="8" height="8" fill="#d4af37" opacity=".4"/>
+    <rect x="195" y="155" width="8" height="8" fill="#d4af37" opacity=".4"/>
+    <rect x="210" y="150" width="8" height="8" fill="#d4af37" opacity=".4"/>
+    <text x="200" y="245" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Александр I</text>
+  </svg>`,
+  europe:`<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="#1a1f3a"/>
+    <path d="M80 60 Q120 40 180 50 Q240 60 280 45 Q320 55 350 70 Q360 100 340 140 Q300 170 250 160 Q200 170 150 155 Q100 140 80 110 Q70 80 80 60Z" fill="#2a4f3a" opacity=".5"/>
+    <path d="M120 80 Q150 70 180 80 Q190 100 170 110 Q140 105 120 95Z" fill="#d4af37" opacity=".4"/>
+    <path d="M200 70 Q230 60 260 75 Q270 95 250 105 Q220 100 200 85Z" fill="#7b1e2b" opacity=".4"/>
+    <path d="M150 110 Q180 100 210 115 Q220 135 200 145 Q170 140 150 125Z" fill="#4a5568" opacity=".4"/>
+    <circle cx="160" cy="90" r="4" fill="#d4af37"/><circle cx="230" cy="85" r="4" fill="#d4af37"/>
+    <circle cx="190" cy="120" r="4" fill="#d4af37"/><circle cx="280" cy="100" r="3" fill="#d4af37"/>
+    <text x="200" y="240" text-anchor="middle" fill="#d4af37" font-size="11" font-family="Georgia">Европа эпохи Наполеона</text>
+  </svg>`
+};
+
+// ═══════════ SCENES DATA ═══════════
+const scenes = [
+  // ACT 1
+  {id:1,act:1,title:'Переворот 18 брюмера',svg:'brumaire',
+   text:['9 ноября 1799 года. Париж гудит, как растревоженный улей. Генерал Наполеон Бонапарт, только что вернувшийся из Египта, входит в Совет Пятисот. Депутаты кричат, некоторые бросаются с кинжалами. Брат Наполеона, Люсьен, председательствующий в Совете, спасает ситуацию — войска рассеивают депутатов.',
+    'Так завершилась эпоха Директории. Власть перешла к трём консулам, но фактически единолично правил первый консул — Наполеон. «Революция закончилась», — объявил он. Страна устала от хаоса, террора и войны. Люди хотели порядка.',
+    'Перед вами стоит выбор: как отнестись к происшедшему? От этого зависит ваша дальнейшая судьба в новой Франции.'],
+   choices:[
+     {text:'Восторженно поддержать переворот — стране нужен сильный лидер, способный навести порядок после years террора и хаоса Директории.',correct:true,effects:{mainRes:10,loyalty:15,people:5,honor:-5},comment:'Именно так думало большинство французов в 1799 году. Усталость от революции сделала Наполеона желанной фигурой. Переворот 18 брюмера (9 ноября 1799 г.) сверг Директорию и установил Консульство.'},
+     {text:'Настороженно наблюдать — это очередной военный переворот, замена одной диктатуры другой. Республика умирает.',correct:false,effects:{honor:10,loyalty:-10,rep:-5},comment:'Такая позиция была у республиканцев-якобинцев. Они видели в Наполеоне угрозу свободе. Но их голос быстро был заглушен — цензура при Наполеоне стала абсолютной уже к 1810 году.'},
+     {text:'Присоединиться к заговору и потребовать долю власти для себя — раз Директорию свергли, значит и новые правители должны делиться.',correct:false,effects:{honor:-10,rep:-15,loyalty:-20},comment:'Подобные попытки были обречены. Наполеон быстро сосредоточил всю власть в своих руках. С 1802 года его власть стала пожизненной, а в 1804 году он провозгласил себя императором.'}
+   ]},
+  {id:2,act:1,title:'Консульство: первые реформы',svg:'code',
+   text:['1800–1804 годы. Франция при Консульстве преображается. Наполеон — первый консул — проводит реформу за реформой. В 1800 году создан Банк Франции, введена твёрдая валюта — золотой франк. В 1801 году подписан Конкордат с Ватиканом — церковь примиряется с революцией.',
+    'Наполеон назначает префектов в департаменты — «императоров в миниатюре», как их называют. Они наводят порядок на местах. Создаётся система лицеев для образования элиты. Готовится главный труд — Гражданский кодекс.',
+    'Ваша роль в этих преобразованиях может быть значительной. Как вы будете участвовать?'],
+   choices:[
+     {text:'Активно участвовать в разработке Гражданского кодекса — закрепить равенство прав и свободу личности, завоёванные революцией, в законе.',correct:true,effects:{mainRes:10,rep:10,people:10,honor:5},comment:'Гражданский кодекс 1804 года («Кодекс Наполеона») стал одним из величайших достижений эпохи. Он закрепил равенство всех перед законом, свободу личности, неприкосновенность собственности. Этот кодекс действует во Франции до сих пор и повлиял на законодательство многих стран.'},
+     {text:'Сосредоточиться на укреплении армии — внешние враги окружают Францию, нужны победы для удержания власти.',correct:false,effects:{mainRes:5,loyalty:10,people:-5},comment:'Армия действительно была приоритетом Наполеона, но внутренние реформы не менее важны. Сам Наполеон считал: «Моя слава не в том, что я выиграл 40 сражений... но то, что не будет забыто — это мой Гражданский кодекс».'},
+     {text:'Поддержать Конкордат и укрепить связь с церковью — народ нуждается в духовной опоре после лет атеизма и террора.',correct:false,effects:{rep:5,people:5,loyalty:5,honor:-5},comment:'Конкордат 1801 года с Ватиканом действительно был важен — он примирил церковь с революцией. Священники стали присягать Наполеону. Но это был лишь один элемент системы пропаганды и контроля.'}
+   ]},
+  {id:3,act:1,title:'Провозглашение Империи',svg:'coronation',
+   text:['18 мая 1804 года. Сенат принимает конституцию, провозглашающую Францию империей. Наполеон принимает титул «Император французов» — не «император Франции», заметьте! Это тонкая разница: он император не территории, а народа.',
+    'Наполеон проводит референдумы — народ «голосует» за империю. Результаты, разумеется, подделываются, но формально — «воля народа». «Источник силы — это общественное мнение. Что такое правительство? Без мнения — ничто», — говорит Наполеон.',
+    '«Я и есть Французская революция», — заявляет он. Монархия восстановлена, но на новых основаниях — не по божьему праву, а по заслугам. Как вы относитесь к этому?'],
+   choices:[
+     {text:'Принять новую реальность — Империя сохраняет достижения революции (равенство, кодекс), но добавляет стабильность. Титул «император французов» подчёркивает народный характер власти.',correct:true,effects:{mainRes:5,loyalty:10,rep:5,people:5},comment:'Именно так рассуждали большинство современников. Империя Наполеона была необычна: формально — конституционная монархия, фактически — единоличное правление. Референдумы создавали видимость народной поддержки. Титул «император французов» (а не «Франции») подчёркивал связь с революционной традицией.'},
+     {text:'Резко выступить против — это предательство Республики! Революция свергла монархию, а теперь она возвращается под новым названием.',correct:false,effects:{honor:15,loyalty:-20,rep:-10,people:-5},comment:'Такая позиция была у республиканцев. Но их сопротивление было бесполезно — Наполеон контролировал и Сенат, и печать, и армию. К 1810 году цензура газет стала абсолютной.'},
+     {text:'Потребовать дворянский титул и место при дворе — раз создаётся новая империя, нужно занять достойное место в новой аристократии.',correct:false,effects:{wealth:15,rep:10,loyalty:5,honor:-10},comment:'Новое дворянство действительно создавалось — из военных и чиновников. Они получали титулы и земли в завоёванных территориях. Но их «легитимность» была шаткой — они обязаны всем Наполеону.'},
+     {text:'Поддержать империю, но тайно критиковать подделку референдумов — власть должна быть честной с народом.',correct:false,effects:{honor:10,rep:-5,loyalty:-10},comment:'Честная позиция, но опасная. Наполеон активно использовал пропаганду и фальсификации. «Наполеоновская легенда» создавалась специально — картины, газеты, даже утверждение устава Комеди-Франсез в Москве подавалось как триумф.'}
+   ]},
+  {id:4,act:1,title:'Создание «Наполеоновской легенды»',svg:'propaganda',
+   text:['Империя нуждается в образах. Наполеон — мастер пропаганды. Золотая пчела Меровингов становится эмблемой — связь с древними франкскими королями. Художники получают госзаказы: Давид пишет «Коронацию», Гро — батальные полотна.',
+    'Газеты находятся под жёстким контролем. Из десятков парижских газет остаются лишь несколько «одобренных». С 1810 года цензура становится абсолютной. Каждый текст, каждая картина — инструмент власти.',
+    'Вам предлагают участвовать в создании «легенды». Как вы распорядитесь этим инструментом?'],
+   choices:[
+     {text:'Создать серию пропагандистских материалов: образ Наполеона-законодателя (с Кодексом), Наполеона-полководца (в лавровом венке), Наполеона-миротворца. Использовать пчелу как символ.',correct:true,effects:{mainRes:10,loyalty:15,rep:5,people:10},comment:'Именно так работала наполеоновская пропаганда. Образы тщательно конструировались: лавровый венок (античная слава), пчела (древняя династия), Кодекс (законодатель), коронация (сакральность). Даже утверждение устава театра в далёкой Москве подавалось как имперский триумф.'},
+     {text:'Отказаться от пропаганды — правда и так известна, народу не нужны сказки. Пусть судят по делам.',correct:false,effects:{honor:10,loyalty:-15,rep:-5},comment:'Благородная позиция, но в условиях наполеоновской системы невозможная. Цензура была тотальной, а «легенда» — необходимым инструментом удержания власти. Наполеон понимал: без контроля над общественным мнением его режим не устоит.'},
+     {text:'Использовать пропаганду для личных целей — прославить себя рядом с Наполеоном, получить известность и чины.',correct:false,effects:{wealth:10,rep:5,honor:-15,loyalty:5},comment:'Подобные попытки были, но Наполеон не терпел конкурентов в славе. Он был центром системы — все лучи сходились к нему. Личная реклама в условиях империи была опасна.'}
+   ]},
+  // ACT 2
+  {id:5,act:2,title:'Третья коалиция. Трафальгар и Аустерлиц',svg:'battle',
+   text:['1805 год. Амьенский мир 1802 года рухнул — спор из-за Мальты («Мальта или война!») привёл к новой войне. Третья коалиция: Англия, Австрия, Россия. Наполеон готовит высадку в Англии, но...',
+    '21 октября 1805 года — Трафальгар. Адмирал Нельсон разбивает франко-испанский флот. Угроза вторжения в Англию снята навсегда. Но Наполеон молниеносно разворачивает армию на восток.',
+    '2 декабря 1805 года — Аустерлиц. «Битва трёх императоров». Наполеон разгромил русско-австрийскую армию. Австрия выходит из войны, создаётся Рейнский союз. Летом 1806 года распущена Священная Римская империя — существовавшая 800 лет!'],
+   choices:[
+     {text:'Служить на фронте, участвовать в марше к Аустерлицу — показать себя в бою, заслужить славу и Орден Почётного легиона.',correct:true,effects:{mainRes:15,loyalty:10,rep:5},comment:'Аустерлиц (2 декабря 1805) — величайшая победа Наполеона. После неё Австрия вышла из войны, был создан Рейнский союз, а летом 1806 года распущена Священная Римская империя — institution, существовавшая с 962 года!'},
+     {text:'Остаться в тылу, обеспечивать логистику и управление завоёванными территориями — война выигрывается не только штыками.',correct:false,effects:{wealth:10,rep:10,mainRes:5},comment:'Тыловая служба важна, но именно победы на поле боя были нужны Наполеону для удержания трона. «Победы нужны для удержания трона» — ключевая причина его постоянных войн.'},
+     {text:'Попытаться установить контакт с англичанами — Трафальгар показал, что Франция не может победить на море, нужен мир.',correct:false,effects:{honor:5,loyalty:-20,rep:-10},comment:'Подобные мысли были у некоторых, но Наполеон не допускал пораженческих настроений. Англо-французские противоречия (колониальные споры, торговая конкуренция) были слишком глубоки. Англия финансировала коалиции против Франции.'}
+   ]},
+  {id:6,act:2,title:'Йена, Ауэрштедт и континентальная блокада',svg:'blockade',
+   text:['1806 год. Четвёртая коалиция. Пруссия разбита при Йене и Ауэрштедте одновременно. Берлин пал. Наполеон отправляет в Париж шпагу Фридриха Великого — символ прусской мощи сломлен.',
+    'Но как победить Англию, если флот уничтожен при Трафальгаре? Наполеон издаёт указ о континентальной блокаде — запретить всей Европе торговать с Англией. Экономическое оружие!',
+    'Однако блокада бьёт не только по Англии, но и по самой Франции и её союзникам. Контрабанда цветёт. Экономика страдает. Как вы относитесь к блокаде?'],
+   choices:[
+     {text:'Поддержать блокаду, но искать способы смягчить её последствия для Франции — квоты на торговлю, исключения для ключевых товаров.',correct:true,effects:{mainRes:5,wealth:5,loyalty:10,people:5},comment:'Континентальная блокада действительно была «экономическим оружием» против Англии. Но она ударила по всей Европе, включая Францию. Россия терпела убытки и нарушала запрет. Франция сама торговала с Англией по квотам — двойственная политика!'},
+     {text:'Саботировать блокаду тайно — она разоряет купцов и ведёт к неизбежному конфликту с Россией. Нужно искать дипломатическое решение.',correct:false,effects:{honor:10,loyalty:-15,wealth:-5},comment:'Саботаж был опасен — Наполеон жёстко контролировал исполнение. Но экономические противоречия блокады действительно стали одной из причин конфликта с Россией и ultimately — похода 1812 года.'},
+     {text:'Воспользоваться блокадой для личного обогащения — контрабанда приносит огромные прибыли, нужно занять своё место.',correct:false,effects:{wealth:20,honor:-20,loyalty:-10},comment:'Контрабанда действительно процветала, но риск был огромным. Наполеон беспощадно карал нарушителей блокады. Это путь к богатству, но и к позору.'}
+   ]},
+  {id:7,act:2,title:'Тильзитский мир',svg:'europe',
+   text:['Июль 1807 года. Плот на реке Неман. Наполеон и Александр I встречаются посреди реки — ни один не хочет уступать территорию другому. После Прейсиш-Эйлау (ничья, февраль 1807) и Фридланда (победа Франции) Пруссия на коленях.',
+    'Тильзитский мир жесток для Пруссии: она теряет половину земель. Создаётся Герцогство Варшавское. Россия присоединяется к континентальной блокаде, уступает опорные пункты на Средиземном море. Заключён франко-русский союз.',
+    'Александр I спас Пруссию от полного раздела — Наполеон хотел её уничтожить. Но российский император настоял на сохранении прусского государства. Как вы оцениваете этот мир?'],
+   choices:[
+     {text:'Поддержать мир как триумф французской дипломатии — Пруссия наказана, Россия — союзница, Англия изолирована. Пик могущества Империи!',correct:true,effects:{mainRes:10,loyalty:15,rep:10,people:5},comment:'Тильзитский мир 1807 года — действительно пик могущества Наполеона. Пруссия потеряла половину земель, создана Варшавская герцогство, Россия стала союзницей. Но это был пик — дальше начинался спад. Блокада разоряла Европу, а Александр I не собирался вечно ей подчиняться.'},
+     {text:'Предупреждать: этот мир хрупкий. Россия присоединилась к блокаде формально — она терпит убытки и скоро нарушит условия. Нужна осторожность.',correct:false,effects:{honor:10,loyalty:-5,rep:5},comment:'Проницательная оценка! Действительно, экономические противоречия блокады (Россия терпела убытки, нарушала запрет, поднимала тарифы) стали одной из главных причин будущего конфликта 1812 года.'},
+     {text:'Требовать полного раздела Пруссии — раз бьём, то бьём навсегда. Прусский реваншизм неизбежен, если оставить государство.',correct:false,effects:{loyalty:5,honor:-10,rep:-5},comment:'Наполеон именно этого и хотел, но Александр I настоял на сохранении Пруссии. Как показали события 1813-1815 годов, прусский реваншизм действительно стал одной из сил, уничтоживших Империю.'}
+   ]},
+  // ACT 3
+  {id:8,act:3,title:'Испанская герилья и Тироль',svg:'guerrilla',
+   text:['1808 год. Испания. Наполеон посадил на испанский трон своего брата Жозефа. Но испанцы не желают принимать «чужаков». Начинается народная война — герилья. Партизаны нападают из засад, на дорогах, в горах.',
+    '1809 год. Тироль. Андреас Гофер поднимает восстание против баварцев — союзников Франции. Горные стрелки наносят чувствительные потери. Эти «маленькие войны» высасывают ресурсы Империи.',
+    'Французская армия, привыкшая к генеральным сражениям, бессильна против партизан. Сотни тысяч солдат скованы в Испании. Как вы действуете?'],
+   choices:[
+     {text:'Предложить Наполеону компромисс с испанцами — восстановить традиционные права, дать автономию. Война не стоит таких потерь.',correct:true,effects:{honor:10,people:10,loyalty:-5,rep:5},comment:'Испанская герилья (1808-1814) стала «язвой» Империи. 300 000 французских солдат были скованы в Испании. Наполеон называл это «испанской язвой». Но пойти на уступки означало признать слабость — а Наполеон не мог себе этого позволить: «победы нужны для удержания трона».'},
+     {text:'Участвовать в подавлении — показать, что Империя не терпит неповиновения. Жёсткие меры устрашат остальных.',correct:false,effects:{loyalty:10,honor:-15,people:-10,mainRes:5},comment:'Жёсткие меры применялись, но не помогали. Герилья продолжалась до 1814 года. Тирольское восстание тоже было подавлено, но показало: народы не желают мириться с наполеоновской системой.'},
+     {text:'Вывести войска из Испании и Тироля — эти войны истощают силы, а ресурсы нужны для большой войны с Россией.',correct:false,effects:{honor:5,loyalty:-15,people:5},comment:'Логичный аргумент, но Наполеон не мог отступить — это было бы признанием слабости. Его власть держалась на победах. Отступление означало начало конца.'}
+   ]},
+  {id:9,act:3,title:'Кризис 1811 года и «Завещание Петра Великого»',svg:'propaganda',
+   text:['1811 год. Франция устала. Экономический кризис, потери в Испании, недовольство континентальной блокадой. Наполеону нужна новая победа — для удержания трона, для нового дворянства и буржуазии, жаждущих добычи.',
+    'Но как оправдать войну с Россией? В ход идёт пропаганда. Россию изображают как «варварскую нацию». Распространяется фальшивка — «Завещание Петра Великого» — документ, якобы доказывающий, что Россия веками планирует захватить Европу.',
+    'На самом деле «Завещание» — труд польского генерала, чиновника МИД и литератора-неудачника. Миф, который живёт до сих пор и влиял даже на решения Трумэна! Но сейчас он — инструмент разжигания войны.'],
+   choices:[
+     {text:'Раскритиковать фальшивку — война должна иметь реальные причины, а не строиться на подделках. Это подрывает доверие к власти.',correct:true,effects:{honor:15,loyalty:-15,rep:5,people:5},comment:'«Завещание Петра Великого» — одна из самых живучих фальшивок в истории. Созданное польским генералом, чиновником МИД и литератором-неудачником, оно выдавалось за документ XVIII века. Миф живёт до сих пор и влиял даже на политику XX века (Трумэн)! Критиковать его в 1811 году было опасно.'},
+     {text:'Поддержать пропагандистскую кампанию — «Завещание» убеждает народ и армию, что Россия — угроза. Война необходима.',correct:false,effects:{loyalty:15,honor:-15,rep:-5,people:-5},comment:'Именно так и поступили. Пропаганда изображала Россию как «варварскую нацию», а «Завещание Петра Великого» служило «доказательством» агрессивных планов. Но война, начатая на лжи, несёт в себе зерно поражения.'},
+     {text:'Молчать и не вмешиваться — это не ваше дело, вы не пропагандист. Главное — выполнить свой долг.',correct:false,effects:{rep:-5,honor:-5,loyalty:5},comment:'Молчание перед ложью — тоже выбор. Многие современники предпочитали не замечать подделки, но именно это позволило пропаганде работать беспрепятственно.'}
+   ]},
+  {id:10,act:3,title:'Решение о походе на Россию',svg:'europe',
+   text:['Начало 1812 года. Решение принято — Великая армия (600 000 человек!) идёт на Россию. Причины: экономические противоречия блокады (Россия нарушает запрет, поднимает тарифы; Франция торгует с Англией по квотам); недовольство Наполеона поддержкой России в войне с Австрией 1809 года; нужда в новой победе из-за усталости Франции.',
+    'К 1812 году Россия — единственная самостоятельная держава в Европе с боеспособной армией. Наполеон считает: быстрый разгром России заставит Англию сесть за стол переговоров. «Восточная мечта» — влияние в Южной Америке и Австралии — близка.',
+    'Вам предстоит решить: как относиться к этому походу?'],
+   choices:[
+     {text:'Поддержать поход, но настаивать на быстром генеральном сражении — нельзя увязать в России, нужно разгромить армию и диктовать условия.',correct:true,effects:{mainRes:10,loyalty:10,rep:5},comment:'Это была стратегия Наполеона — найти главную русскую армию, разгромить её в генеральном сражении и заставить Александра I подписать мир. Но план провалился: русские отступали, не давая решающей битвы, а когда Бородино состоялось — ни одна сторона не была разгромлена.'},
+     {text:'Выступить против — Россия слишком велика, логистика невозможна, народная война истощит армию. Это самоубийство.',correct:false,effects:{honor:15,loyalty:-20,rep:-10},comment:'Проницательная оценка! Действительно, логистика, народная война и масштабы России сделали поход катастрофой. Но высказаться против означало карьерное самоубийство при Наполеоне.'},
+     {text:'Потребовать назначения на ключевой пост в армии — в большой войне карьера делается быстро. Нужна слава и добыча.',correct:false,effects:{mainRes:5,wealth:10,honor:-10,loyalty:5},comment:'Многие думали именно так — война с Россией обещала славу и добычу. Новое дворянство и крупная буржуазия ждали новых территорий для эксплуатации. Но реальность оказалась страшной.'}
+   ]},
+  // ACT 4
+  {id:11,act:4,title:'Переход Немана. Начало Отечественной войны',svg:'battle',
+   text:['24 июня 1812 года. Великая армия переходит Неман. 600 000 человек — крупнейшая армия, когда-либо виденная в Европе. Французы, немцы, итальянцы, поляки, австрийцы, пруссаки — вся Европа марширует на Россию.',
+    'Но Россия не даёт генерального сражения. Русская армия отступает, сжигая припасы. Логистика Великой армии рушится — лошади дохнут, солдаты голодают, болезни косят ряды. Ещё до первого серьёзного боя армия потеряла треть.',
+    'Это — Отечественная (народная) война. Не просто столкновение армий — весь народ поднимается против захватчиков. Партизаны, ополченцы, крестьяне — все воюют.'],
+   choices:[
+     {text:'Наступать быстро, искать генеральное сражение — только разгром главной армии России даст результат. Нельзя увязать в бесконечных отступлениях.',correct:true,effects:{mainRes:10,loyalty:10,honor:5},comment:'Именно это пытался делать Наполеон. Но русская стратегия изматывания — отступление, тактика «выжженной земли», партизанская война — не давала ему решающего преимущества. Каждая «победа» обходилась слишком дорого.'},
+     {text:'Остановиться на Западной Двине, укрепить тылы, обеспечить логистику — армия не может наступать без снабжения в такой стране.',correct:false,effects:{honor:10,loyalty:-15,mainRes:-5},comment:'Разумный совет, но Наполеон не мог остановиться. Его власть держалась на победах. Остановка означала признание провала плана молниеносной войны. А армия уже таяла без боёв.'},
+     {text:'Попытаться договориться с Александром I через посредников — ещё не поздно остановить кровопролитие.',correct:false,effects:{honor:15,loyalty:-20,rep:-5},comment:'Попытки переговоров были, но Наполеон не хотел «просто мира» — ему нужна была полная капитуляция. А Александр I не хотел уступать. «Мир на условиях, достойные великой нации» — такова была позиция России.'}
+   ]},
+  {id:12,act:4,title:'Бородино. 26 августа 1812 года',svg:'battle',
+   text:['Бородино. Величайшее сражение Отечественной войны. 130 000 русских против 130 000 французов. Целый день — артиллерия, кавалерийские атаки, штыковые бои. Земля дрожит, дым застилает солнце.',
+    'Наполеон смотрит на русские редуты и говорит: «Да они крепости, которые разрушишь лишь пушками!» Французы берут позиции, но русская армия отходит организованно. Цель — разгромить главные силы — НЕ достигнута.',
+    'Потери чудовищны: около 80 000 убитых и раненых с обеих сторон за один день. Дорога на Москву открыта, но русская армия не уничтожена. Что делать дальше?'],
+   choices:[
+     {text:'Наступать на Москву — занятие столицы должно заставить Александра I капитулировать. Это последний шанс закончить войну победой.',correct:false,effects:{loyalty:10,mainRes:5,honor:-5},comment:'Наполеон именно так и решил. Но занятие Москвы НЕ дало результата. Александр I не капитулировал. «Потеря Москвы не есть потеря России» — говорили русские. Наполеон попал в ловушку.'},
+     {text:'Отступить на зимние квартиры — армия истощена, логистика разрушена, впереди зима. Нужно сохранить силы для новой кампании.',correct:true,effects:{honor:15,loyalty:-10,mainRes:-5,people:5},comment:'Разумное решение, но невозможное для Наполеона. Отступление без победы означало крах его системы. «Победы нужны для удержания трона» — а Бородино не дало решающей победы. Наполеон пошёл на Москву — и погубил армию.'},
+     {text:'Обойти Москву, выйти на коммуникации русской армии, принудить к бою на выгодных условиях — лишить противника снабжения.',correct:false,effects:{mainRes:5,honor:5,loyalty:5},comment:'Тактический манёвр, который мог сработать в другой ситуации. Но армия была уже слишком истощена, а русские отлично знали свою территорию. Время работало против Наполеона.'}
+   ]},
+  {id:13,act:4,title:'Москва. Пожар',svg:'moscow',
+   text:['Сентябрь 1812. Французы входят в Москву — но город пуст. Большинство жителей ушло. А в начале сентября вспыхивает пожар. «Море огня» — горят Земляной и Белый город. Деревянная Москва выгорает на три четверти.',
+    'Французы расстреливают «поджигателей» — но пожар, похоже, был подготовлен заранее. Грабежи, мародёрство, разложение армии. Наполеон ждёт ключей от Кремля — но их нет. Александр I не отвечает на письма.',
+    '35 дней Наполеон стоит в выгоревшей Москве, ожидая мира. Но мир не приходит. Армия тает. Зима на носу. Нужно решать — оставаться или отступать?'],
+   choices:[
+     {text:'Немедленно отступать — каждый день в Москве губит армию. Зима, отсутствие припасов, партизаны — нужно уходить, пока не поздно.',correct:true,effects:{honor:10,mainRes:-5,people:5,loyalty:-10},comment:'Это было единственно разумное решение! Но Наполеон промедлил 35 дней. Когда он наконец двинулся на юг (к нетронутым припасам), было уже поздно — Кутузов перекрыл дорогу. Пришлось отступать по разорённой Смоленской дороге.'},
+     {text:'Остаться в Москве на зимние квартиры — армия нуждается в отдыхе, весною продолжим кампанию. Россия не может воевать вечно.',correct:false,effects:{loyalty:5,honor:-15,mainRes:-15,people:-10},comment:'Катастрофическое решение! Москва выгорела, припасов нет, зима убивает армию. Партизаны перерезают коммуникации. Остаться в Москве значило погубить всю армию — что, впрочем, и произошло.'},
+     {text:'Попытаться восстановить порядок в Москве — наказать мародёров, организовать снабжение, наладить управление. Показать, что французы — не варвары.',correct:false,effects:{honor:10,loyalty:-5,rep:5,mainRes:-5},comment:'Благородная попытка, но нереалистичная. Армия разлагалась, дисциплина рушилась, а Москва была пуста. Восстанавливать было нечего — город горел, жители ушли. Наполеон потерял контроль над ситуацией.'}
+   ]},
+  {id:14,act:4,title:'Отступление. Березина',svg:'retreat',
+   text:['Отступление из Москвы — катастрофа. Голод, холод (-30°C), казаки атакуют арьергард, партизаны режут отставших. Великая армия превращается в толпу замерзающих призраков.',
+    'Переправа через Березину (ноябрь 1812) — финальная катастрофа. Русские армии сходятся с трёх сторон. Мосты горят. Тысячи людей тонут в ледяной реке. Слово «Березина» во французском языке стало синонимом полной катастрофы.',
+    'Из 600 000 человек Великой армии назад вернулись менее 30 000 боеспособных. Остальные — убиты, ранены, пленены, замерзли. Наполеон бросает армию и мчится в Париж — набирать новые войска.'],
+   choices:[
+     {text:'Помогать армии до конца — организовать переправу, спасти раненых, держать строй. Честь и долг важнее жизни.',correct:true,effects:{honor:20,people:10,mainRes:-10,loyalty:5},comment:'Те, кто остался с армией, разделили её судьбу. Переправа через Березину стала символом катастрофы — но и примером мужества тех, кто не бросил товарищей. Слово «Березина» (= полная катастрофа) вошло во французский язык навсегда.'},
+     {text:'Спасаться самому — каждый сам за себя. Армия обречена, нужно сохранить жизнь для будущей борьбы.',correct:false,effects:{honor:-25,wealth:5,people:-10,loyalty:-10},comment:'Дезертирство в такой момент — худший выбор. Те, кто бежал, были презираемы и часто гибли от казаков или крестьян. Народная война не щадила никого — ни солдат, ни мародёров.'},
+     {text:'Сдаться в плен — война проиграна, дальнейшее сопротивление бессмысленно. Русские обходятся с пленными гуманно.',correct:false,effects:{honor:-10,loyalty:-20,mainRes:-15},comment:'Пленные французские солдаты действительно часто гибли — условия содержания были тяжёлыми. Сдача в плен не гарантировала спасения. А для офицера это был позор.'}
+   ]},
+  // ACT 5
+  {id:15,act:5,title:'Лейпциг. «Битва народов»',svg:'battle',
+   text:['1813 год. Заграничный поход русской армии. Шестая коалиция: Россия, Пруссия, Австрия, Швеция. Наполеон набирает новые армии — «марш-батальоны» из юношей и стариков. Но это уже не та Великая армия.',
+    'Октябрь 1813 года. Лейпциг. «Битва народов» — крупнейшее сражение в европейской истории до Первой мировой. 600 000 человек сходятся в трёхдневной мясорубке. Ключевую роль играют русские войска.',
+    'Саксонские и баварские войска переходят на сторону союзников прямо во время боя. Наполеон разбит. Путь на Францию открыт.'],
+   choices:[
+     {text:'Сражаться до конца за Францию — даже проигрывая, нужно защитить родину от вторжения. Честь и долг.',correct:true,effects:{honor:15,mainRes:10,loyalty:10,people:5},comment:'Лейпциг (октябрь 1813) — «Битва народов» — решил судьбу Империи. Ключевую роль сыграли русские войска. После поражения Наполеона союзники двинулись на Францию. 31 марта 1814 года Александр I торжественно вступает в Париж.'},
+     {text:'Перейти на сторону союзников — война проиграна, Наполеон ведёт страну к гибели. Нужно спасти Францию от него.',correct:false,effects:{honor:-15,loyalty:-25,rep:10,people:5},comment:'Многие маршалы именно так и поступили — они предали Наполеона, поняв, что его амбиции губят страну. Но для тех, кто оставался верен до конца, это было предательством.'},
+     {text:'Организовать оборону Парижа — нужно дать бой на подступах к столице, выиграть время для переговоров.',correct:false,effects:{honor:10,mainRes:5,loyalty:5,rep:5},comment:'Оборона Парижа была организована, но слаба. 31 марта 1814 года союзники вошли в столицу. Маршалы убедили Наполеона отречься — война была проиграна.'}
+   ]},
+  {id:16,act:5,title:'Отречение. Эльба. «Сто дней»',svg:'elba',
+   text:['Апрель 1814. Наполеон отрекается от престола. Ему оставляют остров Эльба в Средиземном море — «империя» в миниатюре. Людовик XVIII, брат казнённого короля, занимает французский трон.',
+    'Но Наполеон не смирился! 1 марта 1815 года он высаживается во Франции. Солдаты, посланные его арестовать, переходят на его сторону. «Сто дней» — последняя вспышка Империи.',
+    'Европа в шоке. Седьмая коалиция формируется мгновенно. Все против Наполеона — даже Франция устала от него. Решающая битва — впереди.'],
+   choices:[
+     {text:'Присоединиться к «Ста дням» — Наполеон всё ещё законный император, его возвращение — шанс восстановить величие Франции.',correct:false,effects:{loyalty:20,honor:-5,mainRes:5,people:-10},comment:'Те, кто присоединился к «Ста дням», разделили судьбу Ватерлоо. 18 июня 1815 года Наполеон был окончательно разбит. Ссылка на Святую Елену, смерть в 1821 году. «Сто дней» стали лебединой песней Империи.'},
+     {text:'Поддержать Реставрацию — Наполеон ушёл, нужна стабильность. Франция заслужила мир после 25 лет войн.',correct:true,effects:{rep:10,people:10,honor:5,loyalty:-10},comment:'Большинство французов устали от войн. Реставрация Бурбонов, несмотря на её проблемы, давала надежду на мир. «Сто дней» показали: Наполеон вёл страну к новой катастрофе.'},
+     {text:'Уехать из Франции — эта страна слишком опасна для честного человека. Каждый режим сменяется следующим, и все наказывают несогласных.',correct:false,effects:{honor:5,wealth:-5,rep:-5},comment:'Эмиграция была выбором многих, но означала потерю всего — карьеры, имущества, связей. Большинство предпочитало адаптироваться к любому режиму.'}
+   ]},
+  {id:17,act:5,title:'Ватерлоо и Святая Елена',svg:'waterloo',
+   text:['18 июня 1815 года. Ватерлоо. Бельгия. Наполеон против Веллингтона и Блюхера. Французы сражаются отчаянно, но союзники превосходят силами. К вечеру всё решено — Наполеон разбит окончательно.',
+    'Наполеон сдаётся англичанам. Его ссылают на остров Святая Елена — крошечный клочок земли в Атлантике. Там он диктует мемуары, создаёт «наполеоновскую легенду» для потомков. Умирает 1821 года.',
+    '«Я хотел власти над миром», — признавался он. Его мечта о всемирной империи, о влиянии в Южной Америке и Австралии — всё рухнуло. Золотая пчела Меровингов, предшественник Карл Великий — всё стало прахом.'],
+   choices:[
+     {text:'Сочувствовать падению великого человека — Наполеон был гением, но его амбиции погубили и его, и миллионы людей. Трагический конец.',correct:true,effects:{honor:10,people:5,rep:5},comment:'Наполеон умер на Святой Елене в 1821 году. Его «Мемориал» — запись разговоров — стал основой «наполеоновской легенды». Он сам создал свой миф для потомков. Но цена его амбиций — миллионы жизней по всей Европе.'},
+     {text:'Радоваться краху тирана — наконец Европа может дышать свободно. Монархия, рождённая из революции, — абсурд, который должен был рухнуть.',correct:false,effects:{honor:-5,loyalty:-10,rep:5,people:5},comment:'Для многих в Европе крах Наполеона был освобождением. Но стоит помнить: он был продуктом Революции, и многие её достижения (Кодекс, равенство) сохранились. Не всё было однозначно.'},
+     {text:'Начать готовить план освобождения Наполеона с острова — он ещё может вернуться, как уже возвращался с Эльбы!',correct:false,effects:{loyalty:15,honor:-5,rep:-15,wealth:-10},comment:'Подобные планы существовали, но были нереалистичны. Святая Елена тщательно охранялась. А Европа не хотела нового Наполеона — «Сто дней» убедили всех: его возвращение означает только войну.'}
+   ]},
+  {id:18,act:5,title:'Венский конгресс',svg:'vienna',
+   text:['1814–1815 годы. Вена. Дипломаты со всей Европы перекраивают карту. Главный принцип — укрепить государства ВОКРУГ Франции, чтобы она больше не угрожала миру.',
+    'Пруссия получает Рейнскую область (чтобы сторожить Францию с востока). Голландия объединяется с Бельгией. Пьемонт получает Савойю и Ниццу. Англия закрепляет Мальту, Цейлон, Капскую колонию.',
+    'Германия остаётся раздробленной, но создаётся Германский союз. Италия раздроблена — Венеция и Ломбардия отходят Австрии. Норвегия — Швеции. Большая часть Герцогства Варшавского становится Царством Польским в составе России.'],
+   choices:[
+     {text:'Поддержать систему «равновесия сил» — каждый получил своё, Франция ослаблена, но не уничтожена. Это гарантия мира в Европе.',correct:true,effects:{rep:15,people:10,honor:5,mainRes:5},comment:'Венский конгресс (1814-1815) действительно создал систему «равновесия сил». Главный принцип — укрепить государства ВОКРУГ Франции: Пруссия на Рейне, Голландия+Бельгия, Пьемонт+Савойя/Ницца. Англия получила ключевые колонии (Мальта, Цейлон, Капская колония). Царство Польское — России. Эта система обеспечила относительный мир до Крымской войны.'},
+     {text:'Требовать жёсткого наказания Франции — она заслужила потерю территорий, возврат к границам 1789 года, контрибуции.',correct:false,effects:{honor:-5,people:-10,rep:5,loyalty:-5},comment:'Такие требования были (особенно от Пруссии), но Александр I и английский министр Каслри настояли на относительно мягких условиях. Жёсткое наказание могло привести к новой французской агрессии — как это случилось после Версальского мира 1919 года.'},
+     {text:'Выступить за восстановление Польши как независимого государства — народы имеют право на самоопределение.',correct:false,effects:{honor:10,rep:-10,people:5,loyalty:-5},comment:'Благородная идея, но нереалистичная в 1815 году. Дипломаты делили территории, а не думали о правах народов. Польша была разделена между Россией, Пруссией и Австрией. Герцогство Варшавское ликвидировано, большая часть — Царство Польское в составе России.'}
+   ]}
+];
+
+// Quick mode scenes
+const quickScenes = [1,3,5,7,10,12,14,16,18];
+
+// ═══════════ MINIGAMES DATA ═══════════
+const minigames = {
+  diplomacy: {
+    title:'🤝 Дипломатический стол',
+    desc:'Тильзит, 1807 год. Вы участвуете в переговорах с Александром I. Выберите правильную позицию для достижения выгодного мира.',
+    rounds:[
+      {q:'Александр I предлагает: «Россия не хочет войны, но не будет унижаться». Ваш ответ:',
+       opts:['«Франция тоже хочет мира, но на условиях равных держав»','«Россия слаба — примите наши условия»','«Война продолжится, если не согласитесь»'],
+       correct:0,explain:'Наполеон и Александр I встречались как равные. На плоту посреди Немана — ни один не уступает территорию. Дипломатия требовала уважения.'},
+      {q:'Обсуждение условий: что предложить России для присоединения к блокаде?',
+       opts:['Территориальные уступки в Европе (Герцогство Варшавское)','Денежную контрибуцию','Угрозу вторжения'],
+       correct:0,explain:'Россия получила влияние в Финляндии и на Дунае, а также «свободу рук» в отношении Швеции и Турции. Территориальные уступки были ключом к союзу.'},
+      {q:'Пруссия просит о пощаде. Наполеон хочет её уничтожить. Ваша позиция:',
+       opts:['Сохранить Пруссию как буфер — полный раздел создаст хаос','Уничтожить Пруссию — она будет мстить','Разделить между Россией и Францией'],
+       correct:0,explain:'Александр I настоял на сохранении Пруссии — и оказался прав. Пруссия, униженная в 1807, стала главной силой реванша в 1813-1815.'}
+    ]
+  },
+  economy: {
+    title:'⚖️ Экономический баланс',
+    desc:'Континентальная блокада. Распределите ресурсы Франции между различными потребностями. Каждое решение имеет последствия.',
+    rounds:[
+      {q:'Купцы жалуются: блокада разоряет портовые города. Что делать?',
+       opts:['Выдать квоты на торговлю через лицензии — часть товаров всё равно нужна','Усилить repression — никаких исключений','Игнорировать — рынок сам регулируется'],
+       correct:0,explain:'Наполеон действительно выдавал лицензии на торговлю. Франция сама торговала с Англией по квотам! Блокада была двойственной.'},
+      {q:'Россия нарушает блокаду, торгуя с Англией. Ваш совет Наполеону:',
+       opts:['Дипломатическое давление + усиление контроля в Германии','Немедленная война','Игнорировать — Россия слишком далека'],
+       correct:0,explain:'Экономические противоречия блокады стали причиной войны 1812 года. Россия терпела убытки, нарушала запрет, поднимала тарифы.'},
+      {q:'Контрабанда цветёт. Как бороться?',
+       opts:['Создать таможенную систему + награды доносчикам','Казнить всех контрабандистов','Легализовать — всё равно не остановить'],
+       correct:0,explain:'Борьба с контрабандой велась, но была малоэффективна. Таможенная система и осведомители — реальные меры наполеоновской эпохи.'}
+    ]
+  },
+  propaganda: {
+    title:'🎨 Пропагандистский плакат',
+    desc:'Создайте образ Наполеона для народа. Выберите элементы, которые использовала наполеоновская пропаганда.',
+    elements:['Лавровый венок (античная слава)','Золотая пчела (династия Меровингов)','Гражданский кодекс (законодатель)','Корона из рук Папы (сакральность)','Меч и лавры (полководец)','Портрет в кабинете (администратор)'],
+    correct:[0,1,2,3,4,5],
+    explain:'Все эти элементы использовались! Лавровый венок — связь с Римом. Пчела — эмблема, найденная в гробнице Меровингов. Кодекс — Наполеон-законодатель. Коронация — сакральность (хотя Наполеон сам короновал себя). Меч — полководец. Кабинет — администратор. Культ личности был тотальным.'
+  },
+  vienna: {
+    title:'🗺️ Венский пазл',
+    desc:'Распределите территории по владельцам согласно решениям Венского конгресса (1814-1815). Перетащите территории к правильным странам.',
+    items:['Рейнская область','Бельгия','Савойя и Ницца','Мальта','Венеция и Ломбардия','Норвегия','Царство Польское'],
+    zones:{
+      'Пруссия':['Рейнская область'],
+      'Голландия':['Бельгия'],
+      'Пьемонт':['Савойя и Ницца'],
+      'Англия':['Мальта'],
+      'Австрия':['Венеция и Ломбардия'],
+      'Швеция':['Норвегия'],
+      'Россия':['Царство Польское']
+    }
+  },
+  chronology: {
+    title:'📅 Хронология',
+    desc:'Расставьте события в правильном хронологическом порядке.',
+    events:[
+      {text:'Переворот 18 брюмера',year:1799},
+      {text:'Гражданский кодекс',year:1804},
+      {text:'Аустерлиц',year:1805},
+      {text:'Тильзитский мир',year:1807},
+      {text:'Бородино',year:1812},
+      {text:'Лейпциг («Битва народов»)',year:1813},
+      {text:'Ватерлоо',year:1815},
+      {text:'Венский конгресс',year:1815}
+    ]
+  }
+};
+
+// Minigame order (when they appear)
+const minigameOrder = [
+  {after:4, game:'propaganda'},
+  {after:7, game:'diplomacy'},
+  {after:9, game:'economy'},
+  {after:15, game:'chronology'},
+  {after:18, game:'vienna'}
+];
+
+// ═══════════ ENDINGS ═══════════
+function getEnding(){
+  const s=state;
+  const correctCount=s.choices.filter(c=>c.correct).length;
+  const totalChoices=s.choices.length||1;
+  const pct=correctCount/totalChoices;
+  const mgCorrect=Object.values(s.minigameResults).filter(v=>v).length;
+  const totalMg=5;
+  const mgPct=mgCorrect/totalMg;
+  
+  // Calculate score
+  const score=pct*0.6+mgPct*0.4;
+  
+  let ending,type,grade,comment;
+  
+  if(s.flags.betrayed && s.flags.betrayed===true){
+    ending='Предатель';type='Вы перешли к союзникам ради карьеры.';
+    grade=s.honor<30?'3':'2';
+    comment='Ваша карьера сложилась, но честь потеряна. История не милосердна к предателям — даже если они были правы.';
+  } else if(s.flags.deadInWar || (s.loyalty>70 && s.mainRes>60 && s.honor>50)){
+    ending='Герой Империи';type='Верность до конца, награды и слава.';
+    grade=score>=0.8?'5':score>=0.6?'4':'3';
+    comment='Вы прошли путь от переворота до Ватерлоо, сохраняя верность и честь. Награды — Орден Почётного легиона, титул. Но цена — миллионы жизней.';
+  } else if(s.rep>65 && s.mainRes>50 && mgPct>=0.6){
+    ending='Дипломат';type='Заметная роль на Венском конгрессе.';
+    grade=score>=0.8?'5':score>=0.6?'4':'3';
+    comment='Ваш дипломатический талант был замечен. Вы участвовали в создании послевоенного порядка Европы. Редкий дар — видеть дальше сиюминутных побед.';
+  } else if(s.people>60 && s.honor>50 && pct<0.5){
+    ending='Разочарованный';type='Поняли ошибки системы, но не смогли изменить.';
+    grade=score>=0.6?'4':'3';
+    comment='Вы видели, что Империя строится на лжи и насилии. Но изменить ничего не смогли. Такие люди — совесть эпохи, но их голос редко бывает услышан.';
+  } else if(s.mainRes<20 || s.honor<20){
+    ending='Жертва войны';type='Погибли или разорены в кампаниях 1812-1815.';
+    grade=score>=0.6?'3':'2';
+    comment='Войны Наполеона поглотили миллионы. Вы стали одним из них — безымянной жертвой амбиций одного человека. История помнит полководцев, но забывает солдат.';
+  } else {
+    ending='Прагматик';type='Пережили все режимы, сохранили себя.';
+    grade=score>=0.8?'5':score>=0.6?'4':'3';
+    comment='Вы умели адаптироваться к любым обстоятельствам. Империя, Реставрация, «Сто дней» — вы были везде и нигде. Мудрость или беспринципность? История рассудит.';
+  }
+  
+  return {ending,type,grade,comment,score};
+}
+
+// ═══════════ SCREEN MANAGEMENT ═══════════
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  playSound('click');
+}
+
+// ═══════════ CHARACTER CREATION ═══════════
+let selectedRole='',selectedOrigin='';
+
+function selectRole(el){
+  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedRole=el.dataset.role;
+  checkCreateReady();
+  playSound('click');
+}
+
+function selectOrigin(el){
+  document.querySelectorAll('.origin-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedOrigin=el.dataset.origin;
+  checkCreateReady();
+  playSound('click');
+}
+
+function checkCreateReady(){
+  const name=document.getElementById('char-name').value.trim();
+  document.getElementById('btn-begin').disabled=!(name&&selectedRole&&selectedOrigin);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('char-name').addEventListener('input',checkCreateReady);
+  // Check for save
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  if(saves.length>0)document.getElementById('continue-btn').style.display='block';
+});
+
+function startNewGame(){
+  state={name:'',role:'',origin:'',mainRes:50,wealth:50,rep:50,people:50,loyalty:50,honor:50,
+    act:1,sceneIdx:0,flags:{},journal:[],achievements:[],choices:[],minigameResults:{},
+    startTime:Date.now(),quickMode:false,exploreMode:false,
+    settings:{...state.settings}};
+  showScreen('create-screen');
+}
+
+function startQuickGame(){
+  startNewGame();
+  state.quickMode=true;
+}
+
+function startExploreMode(){
+  startNewGame();
+  state.exploreMode=true;
+}
+
+function continueGame(){
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  if(saves.length>0){
+    const last=saves[saves.length-1];
+    const data=JSON.parse(localStorage.getItem(last));
+    state={...state,...data};
+    showScreen('game-screen');
+    renderScene();
+  }
+}
+
+function beginGame(){
+  state.name=document.getElementById('char-name').value.trim();
+  state.role=selectedRole;
+  state.origin=selectedOrigin;
+  state.startTime=Date.now();
+  
+  // Apply origin bonuses
+  if(state.origin==='noble'){state.rep+=15;state.honor+=5}
+  else if(state.origin==='bourgeois'){state.wealth+=15;state.rep+=5}
+  else{state.people+=15;state.honor+=5}
+  
+  // Apply role bonuses
+  if(state.role==='officer'){state.mainRes+=10}
+  else if(state.role==='official'){state.rep+=10}
+  else{state.rep+=5;state.people+=5}
+  
+  // Set main resource label
+  const labels={officer:'Военная слава',official:'Полит. влияние',diplomat:'Диплом. вес'};
+  document.getElementById('main-res-label').textContent=labels[state.role]||'Ресурс';
+  
+  showScreen('game-screen');
+  state.sceneIdx=0;
+  renderScene();
+  saveGame();
+}
+
+// ═══════════ RENDER SCENE ═══════════
+function renderScene(){
+  const actScenes = state.quickMode ? scenes.filter(s=>quickScenes.includes(s.id)) : scenes;
+  
+  if(state.sceneIdx>=actScenes.length){
+    showEnding();
+    return;
+  }
+  
+  const scene=actScenes[state.sceneIdx];
+  state.act=scene.act;
+  
+  // Check if minigame should appear
+  const mg=minigameOrder.find(m=>m.after===scene.id && !state.minigameResults.hasOwnProperty(m.game));
+  if(mg && !state.flags['mg_'+mg.game+'_shown']){
+    state.flags['mg_'+mg.game+'_shown']=true;
+    showMinigame(mg.game);
+    return;
+  }
+  
+  // Update HUD
+  updateHUD();
+  document.getElementById('hud-act').textContent='Акт '+'I'.repeat(scene.act).replace(/I/g,m=>({1:'I',2:'II',3:'III',4:'IV',5:'V'}[scene.act]||'I'));
+  
+  // Shuffle choices (keeping track of positions)
+  let choices=[...scene.choices];
+  // Fisher-Yates shuffle
+  for(let i=choices.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [choices[i],choices[j]]=[choices[j],choices[i]];
+  }
+  
+  const content=document.getElementById('game-content');
+  content.innerHTML=`
+    <div class="scene-card">
+      <h2 class="scene-title">${scene.title}</h2>
+      <div class="scene-svg">${svgs[scene.svg]||''}</div>
+      <div class="scene-text">${scene.text.map(p=>'<p>'+p+'</p>').join('')}</div>
+      <div class="choices" id="choices-container">
+        ${choices.map((c,i)=>`<button class="choice-btn" onclick="makeChoice(${scene.id},${i})" data-idx="${i}">${c.text}</button>`).join('')}
+      </div>
+      <div id="comment-area"></div>
+    </div>
+  `;
+  
+  // Store shuffled choices for reference
+  state._currentChoices=choices;
+  content.scrollTop=0;
+}
+
+function makeChoice(sceneId,choiceIdx){
+  const choice=state._currentChoices[choiceIdx];
+  const btns=document.querySelectorAll('.choice-btn');
+  btns.forEach(b=>{b.disabled=true;b.style.pointerEvents='none'});
+  
+  const clickedBtn=btns[choiceIdx];
+  if(choice.correct){
+    clickedBtn.classList.add('correct-chosen');
+    playSound('correct');
+  }else{
+    clickedBtn.classList.add('wrong-chosen');
+    playSound('wrong');
+  }
+  
+  // Show correct answer
+  btns.forEach((b,i)=>{
+    if(state._currentChoices[i].correct)b.classList.add('correct-chosen');
+  });
+  
+  // Apply effects
+  if(choice.effects){
+    Object.entries(choice.effects).forEach(([k,v])=>{
+      if(state[k]!==undefined)state[k]=Math.max(0,Math.min(100,state[k]+v));
+    });
+  }
+  
+  // Record choice
+  state.choices.push({sceneId,choiceIdx,correct:choice.correct,text:choice.text.substring(0,50)+'...'});
+  state.journal.push({act:state.act,scene:state._currentScene||scenes.find(s=>s.id===sceneId).title,choice:choice.text.substring(0,60),correct:choice.correct});
+  
+  // Show comment
+  const commentArea=document.getElementById('comment-area');
+  commentArea.innerHTML=`<div class="history-comment"><strong>📚 Как было на самом деле:</strong><br>${choice.comment}</div>`;
+  
+  // Save
+  saveGame();
+  
+  // Next scene after delay
+  setTimeout(()=>{
+    state.sceneIdx++;
+    renderScene();
+  },state.exploreMode?5000:3500);
+}
+
+function updateHUD(){
+  const mainResKey={officer:'mainRes',official:'rep',diplomat:'rep'}[state.role]||'mainRes';
+  const mainVal=state[mainResKey];
+  
+  document.getElementById('main-res-val').textContent=Math.round(state.mainRes);
+  document.getElementById('main-res-bar').style.width=state.mainRes+'%';
+  document.getElementById('wealth-val').textContent=Math.round(state.wealth);
+  document.getElementById('wealth-bar').style.width=state.wealth+'%';
+  document.getElementById('rep-val').textContent=Math.round(state.rep);
+  document.getElementById('rep-bar').style.width=state.rep+'%';
+  document.getElementById('people-val').textContent=Math.round(state.people);
+  document.getElementById('people-bar').style.width=state.people+'%';
+  document.getElementById('loyalty-val').textContent=Math.round(state.loyalty);
+  document.getElementById('loyalty-bar').style.width=state.loyalty+'%';
+  document.getElementById('honor-val').textContent=Math.round(state.honor);
+  document.getElementById('honor-bar').style.width=state.honor+'%';
+}
+
+// ═══════════ MINIGAMES ═══════════
+function showMinigame(gameId){
+  const container=document.getElementById('minigame-container');
+  const mg=minigames[gameId];
+  
+  if(gameId==='propaganda'){
+    renderPropagandaMG(container,mg);
+  }else if(gameId==='vienna'){
+    renderViennaMG(container,mg);
+  }else if(gameId==='chronology'){
+    renderChronologyMG(container,mg);
+  }else{
+    renderDialogMG(container,mg,gameId);
+  }
+}
+
+function renderDialogMG(container,mg,gameId){
+  let round=0,score=0;
+  
+  function renderRound(){
+    if(round>=mg.rounds.length){
+      state.minigameResults[gameId]=score>=Math.ceil(mg.rounds.length*0.6);
+      container.innerHTML=`<div class="minigame-overlay"><div class="minigame-card">
+        <h2>${mg.title}</h2>
+        <p style="text-align:center;font-size:1.2rem;color:${score>=Math.ceil(mg.rounds.length*0.6)?'var(--green)':'var(--red)'}">
+          Результат: ${score}/${mg.rounds.length}
+        </p>
+        <p style="text-align:center;color:var(--gold)">${score>=Math.ceil(mg.rounds.length*0.6)?'✓ Отлично! Вы понимаете дипломатию/экономику эпохи.' :'✗ Нужно лучше изучить материал §21-22.'}</p>
+        <button class="mg-btn" onclick="closeMinigame()">Продолжить →</button>
+      </div></div>`;
+      return;
+    }
+    const r=mg.rounds[round];
+    container.innerHTML=`<div class="minigame-overlay"><div class="minigame-card">
+      <h2>${mg.title}</h2>
+      <p>${mg.desc}</p>
+      <p style="color:var(--gold);font-weight:bold">Раунд ${round+1}/${mg.rounds.length}</p>
+      <p>${r.q}</p>
+      <div class="mg-options">
+        ${r.opts.map((o,i)=>`<div class="mg-option" onclick="dialogAnswer(${i},${r.correct},'${gameId}')">${o}</div>`).join('')}
+      </div>
+      <div id="mg-explain"></div>
+    </div></div>`;
+  }
+  
+  window.dialogAnswer=function(idx,correct,gId){
+    const opts=document.querySelectorAll('.mg-option');
+    opts.forEach((o,i)=>{
+      o.style.pointerEvents='none';
+      if(i===correct)o.classList.add('correct');
+      if(i===idx&&idx!==correct)o.classList.add('wrong');
+    });
+    if(idx===correct){score++;playSound('correct')}else{playSound('wrong')}
+    document.getElementById('mg-explain').innerHTML=`<div class="history-comment"><strong>💡</strong> ${mg.rounds[round].explain}</div>`;
+    round++;
+    setTimeout(renderRound,2500);
+  };
+  
+  renderRound();
+}
+
+function renderPropagandaMG(container,mg){
+  let selected=[];
+  container.innerHTML=`<div class="minigame-overlay"><div class="minigame-card">
+    <h2>${mg.title}</h2>
+    <p>${mg.desc}</p>
+    <p style="color:var(--gold);font-size:.9rem">Выберите ВСЕ элементы, которые использовала наполеоновская пропаганда:</p>
+    <div class="propaganda-controls" id="prop-controls">
+      ${mg.elements.map((e,i)=>`<div class="propaganda-opt" data-idx="${i}" onclick="toggleProp(${i})">${e}</div>`).join('')}
+    </div>
+    <div id="prop-result"></div>
+    <button class="mg-btn" id="prop-submit" onclick="submitPropaganda()">Проверить</button>
+  </div></div>`;
+  
+  window.toggleProp=function(idx){
+    const el=document.querySelector(`.propaganda-opt[data-idx="${idx}"]`);
+    if(selected.includes(idx)){
+      selected=selected.filter(i=>i!==idx);
+      el.classList.remove('active');
+    }else{
+      selected.push(idx);
+      el.classList.add('active');
+    }
+    playSound('click');
+  };
+  
+  window.submitPropaganda=function(){
+    const allCorrect=mg.elements.length===6; // All are correct in this case
+    const correctCount=selected.length;
+    const isCorrect=correctCount>=5; // At least 5 of 6
+    state.minigameResults.propaganda=isCorrect;
+    
+    document.getElementById('prop-result').innerHTML=`<div class="history-comment"><strong>${isCorrect?'✓ Верно!':'✗ Не совсем.'}</strong> ${mg.explain}</div>`;
+    document.getElementById('prop-submit').textContent='Продолжить →';
+    document.getElementById('prop-submit').onclick=()=>closeMinigame();
+    
+    if(isCorrect)playSound('correct');else playSound('wrong');
+  };
+}
+
+function renderViennaMG(container,mg){
+  let placements={};
+  let dragItem=null;
+  
+  container.innerHTML=`<div class="minigame-overlay"><div class="minigame-card">
+    <h2>${mg.title}</h2>
+    <p>${mg.desc}</p>
+    <p style="color:var(--gold);font-size:.9rem">Перетащите территории к правильным странам (нажмите на территорию, затем на страну):</p>
+    <div class="dnd-container" id="dnd-items">
+      ${mg.items.map(item=>`<div class="dnd-item" data-item="${item}" onclick="selectDndItem(this)">${item}</div>`).join('')}
+    </div>
+    <div class="dnd-zones" id="dnd-zones">
+      ${Object.keys(mg.zones).map(zone=>`<div class="dnd-zone" data-zone="${zone}" onclick="placeDndItem('${zone}')">
+        <div class="dnd-zone-label">${zone}</div>
+      </div>`).join('')}
+    </div>
+    <div id="vienna-result"></div>
+    <button class="mg-btn" id="vienna-submit" onclick="submitVienna()">Проверить</button>
+  </div></div>`;
+  
+  window.selectDndItem=function(el){
+    document.querySelectorAll('.dnd-item').forEach(i=>i.style.outline='none');
+    el.style.outline='2px solid var(--gold)';
+    dragItem=el.dataset.item;
+    playSound('click');
+  };
+  
+  window.placeDndItem=function(zone){
+    if(!dragItem)return;
+    if(!placements[zone])placements[zone]=[];
+    // Remove from previous zone
+    Object.keys(placements).forEach(z=>{
+      placements[z]=placements[z].filter(i=>i!==dragItem);
+    });
+    placements[zone].push(dragItem);
+    // Update visual
+    const zoneEl=document.querySelector(`.dnd-zone[data-zone="${zone}"]`);
+    const existingItems=zoneEl.querySelectorAll('.dnd-item');
+    existingItems.forEach(e=>e.remove());
+    placements[zone].forEach(item=>{
+      const div=document.createElement('div');
+      div.className='dnd-item';
+      div.textContent=item;
+      div.dataset.item=item;
+      div.onclick=function(){selectDndItem(this)};
+      zoneEl.appendChild(div);
+    });
+    // Remove from source
+    const srcItem=document.querySelector(`#dnd-items .dnd-item[data-item="${dragItem}"]`);
+    if(srcItem)srcItem.style.display='none';
+    dragItem=null;
+    playSound('click');
+  };
+  
+  window.submitVienna=function(){
+    let correct=0,total=0;
+    Object.entries(mg.zones).forEach(([zone,items])=>{
+      total+=items.length;
+      items.forEach(item=>{
+        if(placements[zone]&&placements[zone].includes(item))correct++;
+      });
+    });
+    const isCorrect=correct>=Math.ceil(total*0.7);
+    state.minigameResults.vienna=isCorrect;
+    
+    // Show results
+    Object.entries(mg.zones).forEach(([zone,items])=>{
+      const zoneEl=document.querySelector(`.dnd-zone[data-zone="${zone}"]`);
+      items.forEach(item=>{
+        const placed=placements[zone]&&placements[zone].includes(item);
+        // Find the item element in zone
+        zoneEl.querySelectorAll('.dnd-item').forEach(el=>{
+          if(el.dataset.item===item){
+            el.style.borderColor=placed?'var(--green)':'var(--red)';
+          }
+        });
+      });
+    });
+    
+    document.getElementById('vienna-result').innerHTML=`<div class="history-comment"><strong>${isCorrect?'✓ Верно!':'✗ Не совсем.'}</strong> Результат: ${correct}/${total}. Главный принцип Венского конгресса — укрепить государства ВОКРУГ Франции: Пруссия на Рейне, Голландия+Бельгия, Пьемонт+Савойя/Ницца. Англия — Мальта, Цейлон, Капская колония. Австрия — Венеция и Ломбардия. Швеция — Норвегия. Россия — Царство Польское.</div>`;
+    document.getElementById('vienna-submit').textContent='Продолжить →';
+    document.getElementById('vienna-submit').onclick=()=>closeMinigame();
+    
+    if(isCorrect)playSound('correct');else playSound('wrong');
+  };
+}
+
+function renderChronologyMG(container,mg){
+  let items=[...mg.events];
+  // Shuffle
+  for(let i=items.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [items[i],items[j]]=[items[j],items[i]];
+  }
+  let selectedIdx=null;
+  
+  function render(){
+    container.innerHTML=`<div class="minigame-overlay"><div class="minigame-card">
+      <h2>${mg.title}</h2>
+      <p>${mg.desc}</p>
+      <p style="color:var(--gold);font-size:.9rem">Нажмите на два события, чтобы поменять их местами. Расставьте в хронологическом порядке:</p>
+      <div class="timeline-slots" id="timeline-slots">
+        ${items.map((ev,i)=>`<div class="timeline-slot" data-idx="${i}" onclick="swapTimeline(${i})">
+          <span class="slot-num">${i+1}</span>
+          <span>${ev.text} (${ev.year})</span>
+        </div>`).join('')}
+      </div>
+      <div id="chrono-result"></div>
+      <button class="mg-btn" id="chrono-submit" onclick="submitChrono()">Проверить</button>
+    </div></div>`;
+  }
+  
+  window.swapTimeline=function(idx){
+    if(selectedIdx===null){
+      selectedIdx=idx;
+      document.querySelectorAll('.timeline-slot')[idx].style.borderColor='var(--gold)';
+      playSound('click');
+    }else if(selectedIdx===idx){
+      selectedIdx=null;
+      document.querySelectorAll('.timeline-slot')[idx].style.borderColor='';
+    }else{
+      [items[selectedIdx],items[idx]]=[items[idx],items[selectedIdx]];
+      selectedIdx=null;
+      playSound('click');
+      render();
+    }
+  };
+  
+  window.submitChrono=function(){
+    let correct=0;
+    const slots=document.querySelectorAll('.timeline-slot');
+    items.forEach((ev,i)=>{
+      const correctIdx=mg.events.findIndex(e=>e.text===ev.text);
+      if(i===correctIdx){
+        correct++;
+        slots[i].classList.add('correct-pos');
+      }else{
+        slots[i].classList.add('wrong-pos');
+      }
+    });
+    const isCorrect=correct>=Math.ceil(items.length*0.7);
+    state.minigameResults.chronology=isCorrect;
+    
+    document.getElementById('chrono-result').innerHTML=`<div class="history-comment"><strong>${isCorrect?'✓ Верно!':'✗ Не совсем.'}</strong> Правильный порядок: ${correct}/${items.length}. ${mg.events.map(e=>e.text+' ('+e.year+')').join(' → ')}</div>`;
+    document.getElementById('chrono-submit').textContent='Продолжить →';
+    document.getElementById('chrono-submit').onclick=()=>closeMinigame();
+    
+    if(isCorrect)playSound('correct');else playSound('wrong');
+  };
+  
+  render();
+}
+
+function closeMinigame(){
+  document.getElementById('minigame-container').innerHTML='';
+  saveGame();
+  renderScene();
+}
+
+// ═══════════ ENDING ═══════════
+function showEnding(){
+  const result=getEnding();
+  const elapsed=Math.round((Date.now()-state.startTime)/60000);
+  
+  const card=document.getElementById('ending-card');
+  card.innerHTML=`
+    <h2>🏛️ ${result.ending}</h2>
+    <div class="ending-type">${result.type}</div>
+    <div class="scene-svg" style="max-width:300px">${svgs.vienna}</div>
+    <p style="margin:15px 0;line-height:1.7">${result.comment}</p>
+    <div class="ending-grade">Оценка: ${result.grade}/5</div>
+    <div class="ending-stats">
+      <div class="ending-stat"><div class="ending-stat-label">Имя</div><div class="ending-stat-value">${state.name}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Роль</div><div class="ending-stat-value">${{officer:'Офицер',official:'Чиновник',diplomat:'Дипломат'}[state.role]}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Происхождение</div><div class="ending-stat-value">${{noble:'Дворянство',bourgeois:'Буржуазия',common:'Простолюдин'}[state.origin]}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Время</div><div class="ending-stat-value">${elapsed} мин</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Военная слава</div><div class="ending-stat-value">${Math.round(state.mainRes)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Богатство</div><div class="ending-stat-value">${Math.round(state.wealth)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Репутация</div><div class="ending-stat-value">${Math.round(state.rep)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Народная поддержка</div><div class="ending-stat-value">${Math.round(state.people)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Лояльность</div><div class="ending-stat-value">${Math.round(state.loyalty)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Честь</div><div class="ending-stat-value">${Math.round(state.honor)}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Верных решений</div><div class="ending-stat-value">${state.choices.filter(c=>c.correct).length}/${state.choices.length}</div></div>
+      <div class="ending-stat"><div class="ending-stat-label">Мини-игры</div><div class="ending-stat-value">${Object.values(state.minigameResults).filter(v=>v).length}/5</div></div>
+    </div>
+    <div class="ending-buttons">
+      <button class="ending-btn primary" onclick="teacherReport()">📋 Отчёт для учителя</button>
+      <button class="ending-btn" onclick="restartGame()">🔄 Пройти заново</button>
+      <button class="ending-btn" onclick="downloadGame()">⬇️ Скачать игру</button>
+      <button class="ending-btn" onclick="showScreen('menu-screen')">🏠 В меню</button>
+    </div>
+  `;
+  
+  showScreen('ending-screen');
+  saveGame();
+  playSound('victory');
+}
+
+function restartGame(){
+  showScreen('menu-screen');
+}
+
+function teacherReport(){
+  const data=generateReport();
+  const blob=new Blob([data],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`отчёт_${state.name}.txt`;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},200);
+}
+
+function generateReport(){
+  const r=getEnding();
+  let txt=`ОТЧЁТ — Наполеон: Путь Империи\n`;
+  txt+=`═══════════════════════════════\n`;
+  txt+=`Имя: ${state.name}\n`;
+  txt+=`Роль: ${{officer:'Офицер',official:'Чиновник',diplomat:'Дипломат'}[state.role]}\n`;
+  txt+=`Происхождение: ${{noble:'Дворянство',bourgeois:'Буржуазия',common:'Простолюдин'}[state.origin]}\n`;
+  txt+=`Время: ${Math.round((Date.now()-state.startTime)/60000)} мин\n`;
+  txt+=`Концовка: ${r.ending}\n`;
+  txt+=`Оценка: ${r.grade}/5\n\n`;
+  txt+=`РЕСУРСЫ:\n`;
+  txt+=`  Военная слава: ${Math.round(state.mainRes)}\n`;
+  txt+=`  Богатство: ${Math.round(state.wealth)}\n`;
+  txt+=`  Репутация: ${Math.round(state.rep)}\n`;
+  txt+=`  Народная поддержка: ${Math.round(state.people)}\n`;
+  txt+=`  Лояльность: ${Math.round(state.loyalty)}\n`;
+  txt+=`  Честь: ${Math.round(state.honor)}\n\n`;
+  txt+=`ВЕРНЫЕ РЕШЕНИЯ: ${state.choices.filter(c=>c.correct).length}/${state.choices.length}\n`;
+  txt+=`МИНИ-ИГРЫ: ${Object.values(state.minigameResults).filter(v=>v).length}/5\n\n`;
+  txt+=`ЖУРНАЛ ВЫБОРОВ:\n`;
+  state.journal.forEach((j,i)=>{
+    txt+=`  ${i+1}. [${j.correct?'✓':'✗'}] Акт ${j.act}: ${j.choice}\n`;
+  });
+  return txt;
+}
+
+// ═══════════ SAVE/LOAD ═══════════
+function saveGame(){
+  if(!state.name)return;
+  const key='napoleon_game_progress_'+state.name;
+  const data={...state};
+  delete data._currentChoices;
+  localStorage.setItem(key,JSON.stringify(data));
+}
+
+// ═══════════ JOURNAL ═══════════
+function toggleJournal(){
+  const modal=document.getElementById('journal-modal');
+  if(modal.style.display==='none'){
+    modal.style.display='block';
+    const content=document.getElementById('journal-content');
+    if(state.journal.length===0){
+      content.innerHTML='<p style="color:rgba(245,239,224,.6)">Журнал пуст. Сделайте первый выбор!</p>';
+    }else{
+      content.innerHTML=state.journal.map((j,i)=>
+        `<div style="padding:6px 0;border-bottom:1px solid rgba(245,239,224,.1)">
+          <span style="color:${j.correct?'var(--green)':'var(--red)'}">${j.correct?'✓':'✗'}</span>
+          <strong style="color:var(--gold)"> Акт ${j.act}:</strong> ${j.choice}
+        </div>`
+      ).join('');
+    }
+  }else{
+    modal.style.display='none';
+  }
+  playSound('click');
+}
+
+// ═══════════ SETTINGS ═══════════
+function showSettings(){
+  const modal=document.getElementById('settings-modal');
+  modal.style.display=modal.style.display==='none'?'block':'none';
+  playSound('click');
+}
+
+function toggleSetting(key){
+  if(key==='sound'){
+    state.settings.sound=!state.settings.sound;
+    document.getElementById('toggle-sound').classList.toggle('on');
+  }else if(key==='motion'){
+    state.settings.reducedMotion=!state.settings.reducedMotion;
+    document.getElementById('toggle-motion').classList.toggle('on');
+    document.body.classList.toggle('reduced-motion');
+  }
+  saveGame();
+  playSound('click');
+}
+
+// ═══════════ TEACHER MODE ═══════════
+let teacherAuth=false;
+
+function teacherLogin(){
+  const pass=document.getElementById('teacher-pass').value;
+  if(pass==='teacher123'){
+    teacherAuth=true;
+    document.getElementById('teacher-login').style.display='none';
+    document.getElementById('teacher-panel').style.display='block';
+    showTeacherTab('scale');
+    playSound('correct');
+  }else{
+    playSound('wrong');
+    document.getElementById('teacher-pass').style.borderColor='var(--red)';
+    setTimeout(()=>{document.getElementById('teacher-pass').style.borderColor=''},1000);
+  }
+}
+
+function showTeacherTab(tab){
+  document.querySelectorAll('.teacher-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  const content=document.getElementById('teacher-content');
+  
+  if(tab==='scale'){
+    renderScaleTab(content);
+  }else{
+    renderStudentsTab(content);
+  }
+  playSound('click');
+}
+
+function renderScaleTab(content){
+  let html='<h3>📊 Шкала правильных ответов (методичка)</h3>';
+  html+='<p style="font-size:.85rem;color:rgba(245,239,224,.7);margin-bottom:15px">Таблица всех сцен с указанием верных ответов и обоснованием (§21-22)</p>';
+  html+='<div style="overflow-x:auto"><table class="scale-table"><tr><th>№</th><th>Акт</th><th>Тема</th><th>Верный ответ</th><th>Почему (§21-22)</th><th>Баллы</th></tr>';
+  
+  scenes.forEach((s,i)=>{
+    const correctChoice=s.choices.find(c=>c.correct);
+    const correctIdx=s.choices.indexOf(correctChoice);
+    html+=`<tr>
+      <td>${i+1}</td>
+      <td>${s.act}</td>
+      <td>${s.title}</td>
+      <td style="color:var(--green)">Вариант ${correctIdx+1}: ${correctChoice.text.substring(0,80)}...</td>
+      <td style="font-size:.8rem">${correctChoice.comment.substring(0,120)}...</td>
+      <td>+${Object.values(correctChoice.effects).reduce((a,b)=>a+Math.max(0,b),0)}</td>
+    </tr>`;
+  });
+  
+  html+='</table></div>';
+  html+='<h3 style="margin-top:20px">Мини-игры:</h3><ul style="font-size:.9rem">';
+  html+='<li><strong>Дипломатический стол:</strong> 3 раунда, ≥2 верных = зачёт</li>';
+  html+='<li><strong>Экономический баланс:</strong> 3 раунда, ≥2 верных = зачёт</li>';
+  html+='<li><strong>Пропагандистский плакат:</strong> выбрать ≥5 из 6 элементов = зачёт</li>';
+  html+='<li><strong>Венский пазл:</strong> ≥7 из 10 территорий верно = зачёт</li>';
+  html+='<li><strong>Хронология:</strong> ≥6 из 8 в правильном порядке = зачёт</li>';
+  html+='</ul>';
+  html+='<h3 style="margin-top:15px">Шкала оценки:</h3><ul style="font-size:.9rem">';
+  html+='<li><strong style="color:var(--green)">5:</strong> ≥80% верных решений + мини-игры</li>';
+  html+='<li><strong style="color:var(--teal)">4:</strong> ≥60% верных</li>';
+  html+='<li><strong style="color:var(--gold)">3:</strong> Игра пройдена, много ошибок</li>';
+  html+='<li><strong style="color:var(--red)">2:</strong> Не завершил / игнорировал контекст</li>';
+  html+='</ul>';
+  
+  content.innerHTML=html;
+}
+
+function renderStudentsTab(content){
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  
+  let html='<h3>👥 Модерирование учеников</h3>';
+  html+='<div class="teacher-actions">';
+  html+='<button onclick="exportAllStudents()">📥 Экспорт всех (.csv)</button>';
+  html+='<button onclick="exportAllTxt()">📄 Экспорт всех (.txt)</button>';
+  html+='<button onclick="clearAllProgress()" style="border-color:var(--red);color:var(--red)">🗑️ Удалить все записи</button>';
+  html+='</div>';
+  
+  if(saves.length===0){
+    html+='<p style="color:rgba(245,239,224,.6)">Нет записей учеников.</p>';
+  }else{
+    saves.forEach(key=>{
+      const data=JSON.parse(localStorage.getItem(key));
+      const correctCount=(data.choices||[]).filter(c=>c.correct).length;
+      const totalChoices=(data.choices||[]).length||1;
+      const pct=correctCount/totalChoices;
+      const mgCorrect=Object.values(data.minigameResults||{}).filter(v=>v).length;
+      const score=pct*0.6+(mgCorrect/5)*0.4;
+      
+      let autoGrade;
+      if(score>=0.8)autoGrade='5';
+      else if(score>=0.6)autoGrade='4';
+      else if(score>=0.3)autoGrade='3';
+      else autoGrade='2';
+      
+      const manualGrade=data.teacherGrade||autoGrade;
+      const teacherComment=data.teacherComment||'';
+      
+      html+=`<div class="student-card">
+        <h4>${data.name||'Без имени'} — ${{officer:'Офицер',official:'Чиновник',diplomat:'Дипломат'}[data.role]||'?'}</h4>
+        <p style="font-size:.85rem;color:rgba(245,239,224,.7)">
+          Происхождение: ${{noble:'Дворянство',bourgeois:'Буржуазия',common:'Простолюдин'}[data.origin]||'?'} | 
+          Верных: ${correctCount}/${totalChoices} (${Math.round(pct*100)}%) | 
+          Мини-игры: ${mgCorrect}/5 | 
+          Автооценка: <strong>${autoGrade}</strong>
+        </p>
+        <div class="student-choices">`;
+      
+      (data.journal||[]).forEach(j=>{
+        html+=`<div class="student-choice ${j.correct?'correct':'wrong'}">${j.correct?'✓':'✗'} Акт ${j.act}: ${j.choice||''}</div>`;
+      });
+      
+      html+=`</div>
+        <div class="teacher-grade-input">
+          <label style="font-size:.85rem">Оценка:</label>
+          <select onchange="setTeacherGrade('${key}',this.value)">
+            <option value="5" ${manualGrade==='5'?'selected':''}>5</option>
+            <option value="4" ${manualGrade==='4'?'selected':''}>4</option>
+            <option value="3" ${manualGrade==='3'?'selected':''}>3</option>
+            <option value="2" ${manualGrade==='2'?'selected':''}>2</option>
+          </select>
+          <input type="text" placeholder="Комментарий учителя..." value="${teacherComment}" onchange="setTeacherComment('${key}',this.value)" style="flex:1">
+          <button onclick="deleteStudent('${key}')" style="background:rgba(229,62,62,.2);border:1px solid var(--red);color:var(--red);padding:4px 10px;border-radius:4px;font-size:.8rem">✕</button>
+        </div>
+      </div>`;
+    });
+  }
+  
+  content.innerHTML=html;
+}
+
+window.setTeacherGrade=function(key,grade){
+  const data=JSON.parse(localStorage.getItem(key));
+  data.teacherGrade=grade;
+  localStorage.setItem(key,JSON.stringify(data));
+};
+
+window.setTeacherComment=function(key,comment){
+  const data=JSON.parse(localStorage.getItem(key));
+  data.teacherComment=comment;
+  localStorage.setItem(key,JSON.stringify(data));
+};
+
+window.deleteStudent=function(key){
+  if(confirm('Удалить запись ученика?')){
+    localStorage.removeItem(key);
+    showTeacherTab('students');
+    document.querySelectorAll('.teacher-tab')[1].classList.add('active');
+  }
+};
+
+window.clearAllProgress=function(){
+  if(confirm('Удалить ВСЕ записи учеников? Это действие необратимо!')){
+    Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_')).forEach(k=>localStorage.removeItem(k));
+    showTeacherTab('students');
+    document.querySelectorAll('.teacher-tab')[1].classList.add('active');
+  }
+};
+
+window.exportAllStudents=function(){
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  let csv='Имя;Роль;Происхождение;Верных;Всего;%;Мини-игры;Автооценка;Оценка учителя;Комментарий\n';
+  saves.forEach(key=>{
+    const d=JSON.parse(localStorage.getItem(key));
+    const cc=(d.choices||[]).filter(c=>c.correct).length;
+    const tc=(d.choices||[]).length||1;
+    const pct=Math.round(cc/tc*100);
+    const mg=Object.values(d.minigameResults||{}).filter(v=>v).length;
+    const score=cc/tc*0.6+(mg/5)*0.4;
+    const ag=score>=0.8?'5':score>=0.6?'4':score>=0.3?'3':'2';
+    csv+=`${d.name};${d.role};${d.origin};${cc};${tc};${pct};${mg}/5;${ag};${d.teacherGrade||ag};${d.teacherComment||''}\n`;
+  });
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='класс_наполеон.csv';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},200);
+};
+
+window.exportAllTxt=function(){
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  let txt='ОТЧЁТ КЛАССА — Наполеон: Путь Империи\n';
+  txt+='═══════════════════════════════════════\n';
+  txt+='Дата: '+new Date().toLocaleDateString('ru')+'\n\n';
+  saves.forEach(key=>{
+    const d=JSON.parse(localStorage.getItem(key));
+    const cc=(d.choices||[]).filter(c=>c.correct).length;
+    const tc=(d.choices||[]).length||1;
+    const mg=Object.values(d.minigameResults||{}).filter(v=>v).length;
+    const score=cc/tc*0.6+(mg/5)*0.4;
+    const ag=score>=0.8?'5':score>=0.6?'4':score>=0.3?'3':'2';
+    txt+=`── ${d.name} ──\n`;
+    txt+=`Роль: ${d.role} | Происхождение: ${d.origin}\n`;
+    txt+=`Верных: ${cc}/${tc} | Мини-игры: ${mg}/5 | Оценка: ${d.teacherGrade||ag}\n`;
+    txt+=`Комментарий: ${d.teacherComment||'—'}\n\n`;
+  });
+  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='класс_наполеон.txt';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},200);
+};
+
+// ═══════════ DOWNLOAD ═══════════
+function downloadGame(){
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='Napoleon_Put_Imperii_8klass.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},200);
+}
+window.downloadGame=downloadGame;
+
+// ═══════════ INIT ═══════════
+// Check for saved game on load
+window.addEventListener('load',()=>{
+  const saves=Object.keys(localStorage).filter(k=>k.startsWith('napoleon_game_progress_'));
+  if(saves.length>0){
+    document.getElementById('continue-btn').style.display='block';
+  }
+});
+</script>
+</body>
+</html>
